@@ -1,0 +1,4316 @@
+{
+    "chainName": "PMS_Project Infomation Recognition",
+    "chainId": "ab9bddd8ef6f4cf79bfa68dd08c46e62",
+    "chainDesc": "用于识别问题中的项目编码、项目名称并与数据库进行校验",
+    "versionId": "f79cfdb419d244eb8f637bd331c9b714",
+    "registers": [],
+    "prompts": [
+        {
+            "promptId": "1735206591864",
+            "promptName": "LLM识别项目编码",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "154921",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "154930",
+                            "paramName": "权限控制",
+                            "paramAlias": "权限控制",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735206591864~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735206591865",
+                            "paramName": "项目编码_提取",
+                            "paramAlias": "项目编码_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "'''\n你的任务是输出问题中的项目编码，没有找到项目编码时，输出[]，不输出其他内容。\n项目编码必须以字母开头，只由数字和字母组成，且长度大于10，例如：A11211110000530。\n'''\n示例1：“B21302710012232项目的资本开支金额是多少？”中的项目编码是['B21302710012232']。\n示例2：“2022年太原河西5G重要站址攻坚项目的资本开支金额是多少？”中的项目编码是[]\n'''\n用JSON数组格式输出，不要使用Markdown格式，不输出其他内容。\n",
+                "promptTemplate": [],
+                "content": "【#用户输入#】\n",
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "qwen-plus",
+                "provider": "tongyi",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 1,
+                "dataRetryLimit": 1
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "LLM",
+            "position": {
+                "x": 177.53580479710828,
+                "y": 1069.8661295581942
+            },
+            "inComePorts": [
+                "inputParams~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735206633391",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735206591864~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735206591865",
+                            "paramName": "项目编码_提取",
+                            "paramAlias": "项目编码_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735206633391~filter-port-1735206633391",
+                    "params": []
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1735206591865",
+                                "operator": "!0",
+                                "value": []
+                            }
+                        ],
+                        "port": "1735206633391~filter-port-1735206633391",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1735206633391~filter-defatult-port-1735206633391"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 557.3482305408293,
+                "y": 1014.4040150417866
+            },
+            "inComePorts": [
+                "1735206591864~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735206768393",
+            "promptName": "编码查项目",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735206591864~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735206591865",
+                            "paramName": "项目编码_提取",
+                            "paramAlias": "项目编码_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735206633391~filter-port-1735206633391",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735206768393~TOOL-port-1735206786819",
+                    "params": [
+                        {
+                            "paramId": "1735206786818",
+                            "paramName": "项目对象_编码",
+                            "paramAlias": "项目对象_编码",
+                            "paramType": "对象列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": {
+                "useLLM": false,
+                "prompt": "",
+                "tools": [
+                    {
+                        "toolId": "11dd74d07f2f432dafd6ac80618e31d3",
+                        "toolName": "[LPS] 项目编码查询项目",
+                        "toolDesc": "项目编码查询项目",
+                        "toolType": "http",
+                        "toolParams": [
+                            {
+                                "paramName": "codes",
+                                "paramAlias": "codes",
+                                "paramDesc": "",
+                                "required": true,
+                                "paramType": "数组"
+                            },
+                            {
+                                "paramName": "permission",
+                                "paramAlias": "permission",
+                                "paramDesc": "",
+                                "required": true,
+                                "paramType": "对象"
+                            }
+                        ],
+                        "config": {
+                            "reqDefine": {
+                                "params": "{}",
+                                "body": "{\n  \"codes\": \"{{codes}}\",\n  \"permissionRule\": \"{{permission}}\"\n}",
+                                "headers": "{\"Authorization\":\"Bearer access_token=AT-14-lV0ZT94zFbhn6b85U-apNOXfYf34xzLr\"}",
+                                "url": "http://10.172.5.55:8105/pms-query/search-by-code",
+                                "method": "post"
+                            },
+                            "toolOutput": "$.data[:]"
+                        },
+                        "returnDataType": "对象列表",
+                        "createTime": "2024-12-26 17:37:35",
+                        "updateTime": "2024-12-26 17:38:07",
+                        "toolParamsValue": [
+                            {
+                                "paramName": "codes",
+                                "chainParam": {
+                                    "paramId": "1735206591865",
+                                    "paramName": "项目编码_提取",
+                                    "paramAlias": "项目编码_提取",
+                                    "paramType": "数组",
+                                    "paramData": null,
+                                    "sourceType": 0,
+                                    "required": false,
+                                    "paramDataFunc": "",
+                                    "outputOrder": 0,
+                                    "multiFile": false,
+                                    "fileType": [],
+                                    "refLabel": ""
+                                }
+                            }
+                        ],
+                        "port": "1735206768393~TOOL-port-1735206786819",
+                        "groupId": "9c759eae182641718383c83a36d70f72",
+                        "groupName": "移动PMS工具集",
+                        "iconId": "",
+                        "assocCount": 0,
+                        "assocConnBots": [],
+                        "chainPermissions": []
+                    }
+                ]
+            },
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "TOOL",
+            "position": {
+                "x": 1120.8330621365965,
+                "y": 761.5847812400905
+            },
+            "inComePorts": [
+                "1735206633391~filter-port-1735206633391"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735206856810",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735206768393~TOOL-port-1735206786819",
+                    "params": [
+                        {
+                            "paramId": "1735206786818",
+                            "paramName": "项目对象_编码",
+                            "paramAlias": "项目对象_编码",
+                            "paramType": "对象列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735206856810~filter-port-1735206856810",
+                    "params": []
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1735206786818",
+                                "operator": "0",
+                                "value": []
+                            }
+                        ],
+                        "port": "1735206856810~filter-port-1735206856810",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1735206856810~filter-defatult-port-1735206856810"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 1494.3401746806144,
+                "y": 654.4774958791902
+            },
+            "inComePorts": [
+                "1735206768393~TOOL-port-1735206786819"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735206887512",
+            "promptName": "提示编码不存在",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735206591864~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735206591865",
+                            "paramName": "项目编码_提取",
+                            "paramAlias": "项目编码_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735206856810~filter-port-1735206856810",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735206887512~code-exe-defatult-port-1735206887513",
+                    "params": [
+                        {
+                            "paramId": "1735206887530",
+                            "paramName": "提示_编码不存在",
+                            "paramAlias": "提示_编码不存在",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [
+                    {
+                        "variable": "arg1",
+                        "value_selector": {
+                            "paramId": "1735206591865",
+                            "paramName": "项目编码_提取",
+                            "paramAlias": "项目编码_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    }
+                ],
+                "code_language": "javascript",
+                "code": "function main({ arg1 }) {\n  const prjNames = arg1.map((ele) => `\"${ele}\"`).join('，')\n\n  const text = `抱歉，您查找的项目${prjNames}不存在。`\n\n  return {\n    '提示_编码不存在': text\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 2088.005664723014,
+                "y": 498.19510236356246
+            },
+            "inComePorts": [
+                "1735206856810~filter-port-1735206856810"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735211379944",
+            "promptName": "项目权限校验",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "154930",
+                            "paramName": "权限控制",
+                            "paramAlias": "权限控制",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735214956935~code-exe-defatult-port-1735214956936",
+                    "params": [
+                        {
+                            "paramId": "1735214956977",
+                            "paramName": "项目编码_权限校验用",
+                            "paramAlias": "项目编码_权限校验用",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735211379944~TOOL-port-1735211394976",
+                    "params": [
+                        {
+                            "paramId": "1735211394975",
+                            "paramName": "项目对象_编码_有权限",
+                            "paramAlias": "项目对象_编码_有权限",
+                            "paramType": "列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": {
+                "useLLM": false,
+                "prompt": "",
+                "tools": [
+                    {
+                        "toolId": "ff6c02a4fa9b46fb86faa7a89642e88b",
+                        "toolName": "[LPS] 项目权限校验",
+                        "toolDesc": "[LPS] 项目权限校验",
+                        "toolType": "http",
+                        "toolParams": [
+                            {
+                                "paramName": "prj_keys",
+                                "paramAlias": "项目KEY",
+                                "paramDesc": "",
+                                "required": true,
+                                "paramType": "数组"
+                            },
+                            {
+                                "paramName": "permission",
+                                "paramAlias": "permission",
+                                "paramDesc": "",
+                                "required": false,
+                                "paramType": "对象"
+                            }
+                        ],
+                        "config": {
+                            "reqDefine": {
+                                "params": "{}",
+                                "headers": "{\"Authorization\":\"Bearer access_token=AT-14-lV0ZT94zFbhn6b85U-apNOXfYf34xzLr\"}",
+                                "url": "http://10.172.5.55:8105/pms-query/check-permission",
+                                "method": "post",
+                                "body": "{\n  \"prjKeys\": \"{{prj_keys}}\",\n  \"permissionRule\": \"{{permission}}\"\n}"
+                            },
+                            "toolOutput": "$.data[:]"
+                        },
+                        "returnDataType": "数组",
+                        "createTime": "2024-12-26 17:37:35",
+                        "updateTime": "2024-12-26 17:40:27",
+                        "toolParamsValue": [
+                            {
+                                "paramName": "prj_keys",
+                                "chainParam": {
+                                    "paramId": "1735214956977",
+                                    "paramName": "项目编码_权限校验用",
+                                    "paramAlias": "项目编码_权限校验用",
+                                    "paramType": "数组",
+                                    "paramData": null,
+                                    "sourceType": 1,
+                                    "required": false,
+                                    "paramDataFunc": "",
+                                    "outputOrder": 0,
+                                    "multiFile": false,
+                                    "fileType": [],
+                                    "refLabel": ""
+                                }
+                            },
+                            {
+                                "paramName": "permission",
+                                "chainParam": {
+                                    "paramId": "154930",
+                                    "paramName": "权限控制",
+                                    "paramAlias": "权限控制",
+                                    "paramType": "文本",
+                                    "paramData": null,
+                                    "sourceType": 0,
+                                    "required": false,
+                                    "paramDataFunc": "",
+                                    "outputOrder": 0,
+                                    "multiFile": false,
+                                    "fileType": [],
+                                    "refLabel": ""
+                                }
+                            }
+                        ],
+                        "port": "1735211379944~TOOL-port-1735211394976",
+                        "groupId": "9c759eae182641718383c83a36d70f72",
+                        "groupName": "移动PMS工具集",
+                        "iconId": "",
+                        "assocCount": 0,
+                        "assocConnBots": [],
+                        "chainPermissions": []
+                    }
+                ]
+            },
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "TOOL",
+            "position": {
+                "x": 2479.7256924110734,
+                "y": 861.8717805216629
+            },
+            "inComePorts": [
+                "1735214956935~code-exe-defatult-port-1735214956936"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735211460122",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211379944~TOOL-port-1735211394976",
+                    "params": [
+                        {
+                            "paramId": "1735211394975",
+                            "paramName": "项目对象_编码_有权限",
+                            "paramAlias": "项目对象_编码_有权限",
+                            "paramType": "列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735211460122~filter-port-1735211460122",
+                    "params": []
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1735211394975",
+                                "operator": "0",
+                                "value": []
+                            }
+                        ],
+                        "port": "1735211460122~filter-port-1735211460122",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1735211460122~filter-defatult-port-1735211460122"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 2874.7318156574397,
+                "y": 746.379379166337
+            },
+            "inComePorts": [
+                "1735211379944~TOOL-port-1735211394976"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735211490532",
+            "promptName": "提示编码无权限",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735206768393~TOOL-port-1735206786819",
+                    "params": [
+                        {
+                            "paramId": "1735206786818",
+                            "paramName": "项目对象_编码",
+                            "paramAlias": "项目对象_编码",
+                            "paramType": "对象列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735211460122~filter-port-1735211460122",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735211490532~code-exe-defatult-port-1735211490533",
+                    "params": [
+                        {
+                            "paramId": "1735211490545",
+                            "paramName": "提示_编码无权限",
+                            "paramAlias": "提示_编码无权限",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [
+                    {
+                        "variable": "arg1",
+                        "value_selector": {
+                            "paramId": "1735206786818",
+                            "paramName": "项目对象_编码",
+                            "paramAlias": "项目对象_编码",
+                            "paramType": "对象列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    }
+                ],
+                "code_language": "javascript",
+                "code": "function main({arg1}) {\n  const prjNames = arg1.map((ele) => `\"${ele.prj_code}\"`).join(',')\n  const text = `抱歉，您没有权限访问项目${prjNames}。`\n  return {\n      \"提示_编码无权限\": text\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 3457.086769007922,
+                "y": 799.0998513731168
+            },
+            "inComePorts": [
+                "1735211460122~filter-port-1735211460122"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735211562210",
+            "promptName": "复制对象用于输出",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211379944~TOOL-port-1735211394976",
+                    "params": [
+                        {
+                            "paramId": "1735211394975",
+                            "paramName": "项目对象_编码_有权限",
+                            "paramAlias": "项目对象_编码_有权限",
+                            "paramType": "列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735211460122~filter-defatult-port-1735211460122",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735211562210~code-exe-defatult-port-1735211562211",
+                    "params": [
+                        {
+                            "paramId": "1735211562226",
+                            "paramName": "项目信息_编码_输出",
+                            "paramAlias": "项目信息_编码_输出",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [
+                    {
+                        "variable": "arg1",
+                        "value_selector": {
+                            "paramId": "1735211394975",
+                            "paramName": "项目对象_编码_有权限",
+                            "paramAlias": "项目对象_编码_有权限",
+                            "paramType": "列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    }
+                ],
+                "code_language": "javascript",
+                "code": "function main({arg1}) {\n  return {\n      \"项目信息_编码_输出\": arg1\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 3473.5735247862094,
+                "y": 950.4620479080514
+            },
+            "inComePorts": [
+                "1735211460122~filter-defatult-port-1735211460122"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735211666267",
+            "promptName": "识别项目名称",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "154921",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735206633391~filter-defatult-port-1735206633391",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735211666267~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735211666283",
+                            "paramName": "项目名称_提取",
+                            "paramAlias": "项目名称_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": "'''\n你的任务是从问题中识别并提取“项目名称”，不输出其他内容。\n没有项目名称时输出空。\n'''\n以下是项目名称的示例：\n- 5G二期SA核心网建设工程云南公司工程节点\n- 日志上报网关一期工程\n- 一经二期\n- 中国移动江苏公司2022年常州地区5G四期一阶段室外站无线主设备工程\n- 中国移动内容分发网络CDN内容中心二期工程-上海节点\n- 浙江公司2021年省干传输网二十期台金光缆建设项目\n- 2021年综合业务接入区光缆线路一期工程_徐州分公司\n'''\n问题：【#用户输入#】\n'''\n用数组格式输出，不要使用Markdown格式。\n",
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "qwen-plus",
+                "provider": "tongyi",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 1,
+                "dataRetryLimit": 1
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "LLM",
+            "position": {
+                "x": 1119.0617512225936,
+                "y": 1492.7802838853015
+            },
+            "inComePorts": [
+                "1735206633391~filter-defatult-port-1735206633391"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735211753911",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211666267~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735211666283",
+                            "paramName": "项目名称_提取",
+                            "paramAlias": "项目名称_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735211753911~filter-port-1735211753911",
+                    "params": []
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1735211666283",
+                                "operator": "0",
+                                "value": []
+                            }
+                        ],
+                        "port": "1735211753911~filter-port-1735211753911",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1735211753911~filter-defatult-port-1735211753911"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 1472.5859174151867,
+                "y": 1370.6171316836862
+            },
+            "inComePorts": [
+                "1735211666267~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735211771460",
+            "promptName": "输出统计标志",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211753911~filter-port-1735211753911",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735211771460~code-exe-defatult-port-1735211771461",
+                    "params": [
+                        {
+                            "paramId": "1735211771484",
+                            "paramName": "统计标志_1",
+                            "paramAlias": "统计标志_1",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "javascript",
+                "code": "function main() {\n  return {\n      \"统计标志_1\": \"统计类问题\"\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 2032.3863648228935,
+                "y": 1210.5960671363428
+            },
+            "inComePorts": [
+                "1735211753911~filter-port-1735211753911"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735211889039",
+            "promptName": "校验项目名称有效性",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211666267~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735211666283",
+                            "paramName": "项目名称_提取",
+                            "paramAlias": "项目名称_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735211753911~filter-defatult-port-1735211753911",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735211889039~TOOL-port-1735211903801",
+                    "params": [
+                        {
+                            "paramId": "1735211903800",
+                            "paramName": "项目名称_提取_有效",
+                            "paramAlias": "项目名称_提取_有效",
+                            "paramType": "对象列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": {
+                "useLLM": false,
+                "prompt": "",
+                "tools": [
+                    {
+                        "toolId": "28d6881a427949e699928a4eb1d64af9",
+                        "toolName": "[LPS] 校验项目名称是否为统计条件",
+                        "toolDesc": "校验项目名称是否为统计条件。用于校验LLM提取的项目名称是否合理，LLM有时会将统计条件提取为项目名称。 如果提取的项目名称全是由统计条件组成的，则不是有效的项目名称",
+                        "toolType": "http",
+                        "toolParams": [
+                            {
+                                "paramName": "names",
+                                "paramAlias": "names",
+                                "paramDesc": "",
+                                "required": true,
+                                "paramType": "数组"
+                            }
+                        ],
+                        "config": {
+                            "reqDefine": {
+                                "params": "{}",
+                                "body": "{\n  \"names\": \"{{names}}\"\n}",
+                                "headers": "{\"Authorization\":\"Bearer access_token=AT-14-lV0ZT94zFbhn6b85U-apNOXfYf34xzLr\"}",
+                                "url": "http://10.172.5.55:8105/pms-query/validate-project-name",
+                                "method": "post"
+                            },
+                            "toolOutput": "$.data[:]"
+                        },
+                        "returnDataType": "对象列表",
+                        "createTime": "2024-12-26 17:37:35",
+                        "updateTime": "2024-12-26 17:40:18",
+                        "toolParamsValue": [
+                            {
+                                "paramName": "names",
+                                "chainParam": {
+                                    "paramId": "1735211666283",
+                                    "paramName": "项目名称_提取",
+                                    "paramAlias": "项目名称_提取",
+                                    "paramType": "数组",
+                                    "paramData": null,
+                                    "sourceType": 0,
+                                    "required": false,
+                                    "paramDataFunc": "",
+                                    "outputOrder": 0,
+                                    "multiFile": false,
+                                    "fileType": [],
+                                    "refLabel": ""
+                                }
+                            }
+                        ],
+                        "port": "1735211889039~TOOL-port-1735211903801",
+                        "groupId": "9c759eae182641718383c83a36d70f72",
+                        "groupName": "移动PMS工具集",
+                        "iconId": "",
+                        "assocCount": 0,
+                        "assocConnBots": [],
+                        "chainPermissions": []
+                    }
+                ]
+            },
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "TOOL",
+            "position": {
+                "x": 2027.8439438701312,
+                "y": 1868.3350223512834
+            },
+            "inComePorts": [
+                "1735211753911~filter-defatult-port-1735211753911"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735211985587",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211889039~TOOL-port-1735211903801",
+                    "params": [
+                        {
+                            "paramId": "1735211903800",
+                            "paramName": "项目名称_提取_有效",
+                            "paramAlias": "项目名称_提取_有效",
+                            "paramType": "对象列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735211985587~filter-port-1735211985587",
+                    "params": []
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1735211903800",
+                                "operator": "0",
+                                "value": []
+                            }
+                        ],
+                        "port": "1735211985587~filter-port-1735211985587",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1735211985587~filter-defatult-port-1735211985587"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 2408.803322911657,
+                "y": 1747.5937983927674
+            },
+            "inComePorts": [
+                "1735211889039~TOOL-port-1735211903801"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735212001723",
+            "promptName": "输出统计标志",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211985587~filter-port-1735211985587",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735212001723~code-exe-defatult-port-1735212001724",
+                    "params": [
+                        {
+                            "paramId": "1735212001757",
+                            "paramName": "统计标志_2",
+                            "paramAlias": "统计标志_2",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "javascript",
+                "code": "function main() {\n  return {\n      \"统计标志_2\": \"统计类问题\"\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 3007.303807386989,
+                "y": 1633.5028941328644
+            },
+            "inComePorts": [
+                "1735211985587~filter-port-1735211985587"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735212075036",
+            "promptName": "数据库名称查项目",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211666267~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735211666283",
+                            "paramName": "项目名称_提取",
+                            "paramAlias": "项目名称_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735211985587~filter-defatult-port-1735211985587",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735212075036~TOOL-port-1735212094706",
+                    "params": [
+                        {
+                            "paramId": "1735212094705",
+                            "paramName": "项目对象_名称_检索",
+                            "paramAlias": "项目对象_名称_检索",
+                            "paramType": "对象列表",
+                            "paramData": "$.data{}",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": {
+                "useLLM": false,
+                "prompt": "",
+                "tools": [
+                    {
+                        "toolId": "492e3b97f7d54126bb99e6db3b3b7456",
+                        "toolName": "[LPS] 项目名称查询项目",
+                        "toolDesc": "使用LIKE语句查询项目",
+                        "toolType": "http",
+                        "toolParams": [
+                            {
+                                "paramName": "names",
+                                "paramAlias": "names",
+                                "paramDesc": "",
+                                "required": true,
+                                "paramType": "数组"
+                            }
+                        ],
+                        "config": {
+                            "reqDefine": {
+                                "params": "{}",
+                                "body": "{\n  \"names\": \"{{names}}\"\n}",
+                                "headers": "{\"Authorization\":\"Bearer access_token=AT-14-lV0ZT94zFbhn6b85U-apNOXfYf34xzLr\"}",
+                                "url": "http://10.172.5.55:8105/pms-query/search-by-name",
+                                "method": "post"
+                            },
+                            "toolOutput": "$.data{}"
+                        },
+                        "returnDataType": "对象列表",
+                        "createTime": "2024-12-26 17:37:35",
+                        "updateTime": "2024-12-26 17:39:26",
+                        "toolParamsValue": [
+                            {
+                                "paramName": "names",
+                                "chainParam": {
+                                    "paramId": "1735211666283",
+                                    "paramName": "项目名称_提取",
+                                    "paramAlias": "项目名称_提取",
+                                    "paramType": "数组",
+                                    "paramData": null,
+                                    "sourceType": 0,
+                                    "required": false,
+                                    "paramDataFunc": "",
+                                    "outputOrder": 0,
+                                    "multiFile": false,
+                                    "fileType": [],
+                                    "refLabel": ""
+                                }
+                            }
+                        ],
+                        "port": "1735212075036~TOOL-port-1735212094706",
+                        "groupId": "9c759eae182641718383c83a36d70f72",
+                        "groupName": "移动PMS工具集",
+                        "iconId": "",
+                        "assocCount": 0,
+                        "assocConnBots": [],
+                        "chainPermissions": []
+                    }
+                ]
+            },
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "TOOL",
+            "position": {
+                "x": 2997.0158798862717,
+                "y": 2067.0486689558497
+            },
+            "inComePorts": [
+                "1735211985587~filter-defatult-port-1735211985587"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735212148074",
+            "promptName": "知识库名称查项目",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211666267~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735211666283",
+                            "paramName": "项目名称_提取",
+                            "paramAlias": "项目名称_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735211985587~filter-defatult-port-1735211985587",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735212148074~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735212233613",
+                            "paramName": "项目对象_名称_召回",
+                            "paramAlias": "项目对象_名称_召回",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [
+                    {
+                        "knowledgeId": "a4d1d830f58541918a382c07a1c3c559",
+                        "knowledgeName": ""
+                    }
+                ],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 5000,
+                "searchDocLimit": 1,
+                "minCorrelation": 0.9,
+                "resultType": "FULL_TEXT",
+                "rerankerModel": "bce_reranker",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "STRUCT_DATASET",
+                "returnFields": [
+                    "prj_code",
+                    "prj_name"
+                ],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "KNOWLEDGE",
+            "position": {
+                "x": 2993.605049639634,
+                "y": 2176.3419995174027
+            },
+            "inComePorts": [
+                "1735211985587~filter-defatult-port-1735211985587"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735212290922",
+            "promptName": "合并项目对象",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735212148074~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735212233613",
+                            "paramName": "项目对象_名称_召回",
+                            "paramAlias": "项目对象_名称_召回",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735212075036~TOOL-port-1735212094706",
+                    "params": [
+                        {
+                            "paramId": "1735212094705",
+                            "paramName": "项目对象_名称_检索",
+                            "paramAlias": "项目对象_名称_检索",
+                            "paramType": "对象列表",
+                            "paramData": "$.data{}",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735212290922~code-exe-defatult-port-1735212290923",
+                    "params": [
+                        {
+                            "paramId": "1735212290929",
+                            "paramName": "项目对象_合并",
+                            "paramAlias": "项目对象_合并",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [
+                    {
+                        "variable": "arg1",
+                        "value_selector": {
+                            "paramId": "1735212233613",
+                            "paramName": "项目对象_名称_召回",
+                            "paramAlias": "项目对象_名称_召回",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    },
+                    {
+                        "variable": "arg2",
+                        "value_selector": {
+                            "paramId": "1735212094705",
+                            "paramName": "项目对象_名称_检索",
+                            "paramAlias": "项目对象_名称_检索",
+                            "paramType": "对象列表",
+                            "paramData": "$.data{}",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    }
+                ],
+                "code_language": "javascript",
+                "code": "function main({arg1, arg2}) {\n  const result = [...arg1]\n  if (arg1 == null || arg1.length === 0) {\n    // 如果召回项目的准确率不是很高，则加上数据库查询到的记录\n    arg2.forEach((ele) => {\n      if (arg1.some(item => item.prj_code === ele.prj_code) === false) {\n        result.push(ele)\n      }\n    })\n  }\n\n  return {\n    '项目对象_合并': result\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 3385.4312113362544,
+                "y": 2119.455889120116
+            },
+            "inComePorts": [
+                "1735212075036~TOOL-port-1735212094706",
+                "1735212148074~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735212384313",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735212290922~code-exe-defatult-port-1735212290923",
+                    "params": [
+                        {
+                            "paramId": "1735212290929",
+                            "paramName": "项目对象_合并",
+                            "paramAlias": "项目对象_合并",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735212384313~filter-port-1735212384313",
+                    "params": []
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1735212290929",
+                                "operator": "0",
+                                "value": []
+                            }
+                        ],
+                        "port": "1735212384313~filter-port-1735212384313",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1735212384313~filter-defatult-port-1735212384313"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 3746.5217320531424,
+                "y": 2016.320225677097
+            },
+            "inComePorts": [
+                "1735212290922~code-exe-defatult-port-1735212290923"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735212620392",
+            "promptName": "LLM判断项目名称有效性",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211666267~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735211666283",
+                            "paramName": "项目名称_提取",
+                            "paramAlias": "项目名称_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735212384313~filter-port-1735212384313",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735212620392~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735212620401",
+                            "paramName": "是否为项目名称",
+                            "paramAlias": "是否为项目名称",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": "'''\n判断输入的内容是否为“项目名称”，只输出“是”或“否”，不输出其他内容。\n规则：项目名称中不会包含“的”字。\n'''\n输入：【#项目名称_提取#】",
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "qwen-plus",
+                "provider": "tongyi",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 1,
+                "dataRetryLimit": 1
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "LLM",
+            "position": {
+                "x": 4336.117708677476,
+                "y": 1637.3662951384931
+            },
+            "inComePorts": [
+                "1735212384313~filter-port-1735212384313"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735212689913",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735212620392~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735212620401",
+                            "paramName": "是否为项目名称",
+                            "paramAlias": "是否为项目名称",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735212689913~filter-port-1735212689913",
+                    "params": []
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1735212620401",
+                                "operator": "prefix",
+                                "value": [
+                                    {
+                                        "paramId": "1735212700527",
+                                        "paramName": "过滤对比值.193156",
+                                        "paramAlias": "过滤对比值.193156",
+                                        "paramType": "文本",
+                                        "paramData": "是",
+                                        "sourceType": 2,
+                                        "required": false,
+                                        "paramDataFunc": "",
+                                        "outputOrder": 0,
+                                        "multiFile": false,
+                                        "fileType": [],
+                                        "refLabel": ""
+                                    }
+                                ]
+                            }
+                        ],
+                        "port": "1735212689913~filter-port-1735212689913",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1735212689913~filter-defatult-port-1735212689913"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 4700.348139942351,
+                "y": 1523.1612103292882
+            },
+            "inComePorts": [
+                "1735212620392~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735212711228",
+            "promptName": "提示项目名称不存在",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735211666267~port-default",
+                    "params": [
+                        {
+                            "paramId": "1735211666283",
+                            "paramName": "项目名称_提取",
+                            "paramAlias": "项目名称_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735212689913~filter-port-1735212689913",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735212711228~code-exe-defatult-port-1735212711228",
+                    "params": [
+                        {
+                            "paramId": "1735212711248",
+                            "paramName": "提示_项目名称不存在",
+                            "paramAlias": "提示_项目名称不存在",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [
+                    {
+                        "variable": "arg1",
+                        "value_selector": {
+                            "paramId": "1735211666283",
+                            "paramName": "项目名称_提取",
+                            "paramAlias": "项目名称_提取",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    }
+                ],
+                "code_language": "javascript",
+                "code": "function main({ arg1 }) {\n  const prjNames = arg1.map((ele) => `\"${ele}\"`).join('，')\n\n  const text = `抱歉，您查找的项目${prjNames}不存在。`\n\n\n  return {\n    '提示_项目名称不存在': text\n  };\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 5269.6419700967235,
+                "y": 1576.2031981492712
+            },
+            "inComePorts": [
+                "1735212689913~filter-port-1735212689913"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735212825724",
+            "promptName": "输出统计标志",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735212689913~filter-defatult-port-1735212689913",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735212825724~code-exe-defatult-port-1735212825726",
+                    "params": [
+                        {
+                            "paramId": "1735212825749",
+                            "paramName": "统计标志_3",
+                            "paramAlias": "统计标志_3",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "javascript",
+                "code": "function main() {\n  return {\n      \"统计标志_3\": \"统计类问题\"\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 5274.62206211956,
+                "y": 1777.9672043631117
+            },
+            "inComePorts": [
+                "1735212689913~filter-defatult-port-1735212689913"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735212920418",
+            "promptName": "权限校验",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "154930",
+                            "paramName": "权限控制",
+                            "paramAlias": "权限控制",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735212290922~code-exe-defatult-port-1735212290923",
+                    "params": [
+                        {
+                            "paramId": "1735212290929",
+                            "paramName": "项目对象_合并",
+                            "paramAlias": "项目对象_合并",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735215236553~code-exe-defatult-port-1735215236554",
+                    "params": [
+                        {
+                            "paramId": "1735215236598",
+                            "paramName": "项目编码_名称_权限校验用",
+                            "paramAlias": "项目编码_名称_权限校验用",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735212384313~filter-defatult-port-1735212384313",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735212920418~TOOL-port-1735212934715",
+                    "params": [
+                        {
+                            "paramId": "1735212934714",
+                            "paramName": "项目对象_名称_有权限",
+                            "paramAlias": "项目对象_名称_有权限",
+                            "paramType": "列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": {
+                "useLLM": false,
+                "prompt": "",
+                "tools": [
+                    {
+                        "toolId": "ff6c02a4fa9b46fb86faa7a89642e88b",
+                        "toolName": "[LPS] 项目权限校验",
+                        "toolDesc": "[LPS] 项目权限校验",
+                        "toolType": "http",
+                        "toolParams": [
+                            {
+                                "paramName": "prj_keys",
+                                "paramAlias": "项目KEY",
+                                "paramDesc": "",
+                                "required": true,
+                                "paramType": "数组"
+                            },
+                            {
+                                "paramName": "permission",
+                                "paramAlias": "permission",
+                                "paramDesc": "",
+                                "required": false,
+                                "paramType": "对象"
+                            }
+                        ],
+                        "config": {
+                            "reqDefine": {
+                                "params": "{}",
+                                "headers": "{\"Authorization\":\"Bearer access_token=AT-14-lV0ZT94zFbhn6b85U-apNOXfYf34xzLr\"}",
+                                "url": "http://10.172.5.55:8105/pms-query/check-permission",
+                                "method": "post",
+                                "body": "{\n  \"prjKeys\": \"{{prj_keys}}\",\n  \"permissionRule\": \"{{permission}}\"\n}"
+                            },
+                            "toolOutput": "$.data[:]"
+                        },
+                        "returnDataType": "数组",
+                        "createTime": "2024-12-26 17:37:35",
+                        "updateTime": "2024-12-26 17:40:27",
+                        "toolParamsValue": [
+                            {
+                                "paramName": "prj_keys",
+                                "chainParam": {
+                                    "paramId": "1735215236598",
+                                    "paramName": "项目编码_名称_权限校验用",
+                                    "paramAlias": "项目编码_名称_权限校验用",
+                                    "paramType": "数组",
+                                    "paramData": null,
+                                    "sourceType": 1,
+                                    "required": false,
+                                    "paramDataFunc": "",
+                                    "outputOrder": 0,
+                                    "multiFile": false,
+                                    "fileType": [],
+                                    "refLabel": ""
+                                }
+                            },
+                            {
+                                "paramName": "permission",
+                                "chainParam": {
+                                    "paramId": "154930",
+                                    "paramName": "权限控制",
+                                    "paramAlias": "权限控制",
+                                    "paramType": "文本",
+                                    "paramData": null,
+                                    "sourceType": 0,
+                                    "required": false,
+                                    "paramDataFunc": "",
+                                    "outputOrder": 0,
+                                    "multiFile": false,
+                                    "fileType": [],
+                                    "refLabel": ""
+                                }
+                            }
+                        ],
+                        "port": "1735212920418~TOOL-port-1735212934715",
+                        "groupId": "9c759eae182641718383c83a36d70f72",
+                        "groupName": "移动PMS工具集",
+                        "iconId": "",
+                        "assocCount": 0,
+                        "assocConnBots": [],
+                        "chainPermissions": []
+                    }
+                ]
+            },
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "TOOL",
+            "position": {
+                "x": 4976.348993604703,
+                "y": 2220.6710565720095
+            },
+            "inComePorts": [
+                "1735212384313~filter-defatult-port-1735212384313",
+                "1735215236553~code-exe-defatult-port-1735215236554"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735213033355",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735212920418~TOOL-port-1735212934715",
+                    "params": [
+                        {
+                            "paramId": "1735212934714",
+                            "paramName": "项目对象_名称_有权限",
+                            "paramAlias": "项目对象_名称_有权限",
+                            "paramType": "列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735213033355~filter-port-1735213033355",
+                    "params": []
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [],
+                "code_language": "python3",
+                "code": "",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1735212934714",
+                                "operator": "0",
+                                "value": []
+                            }
+                        ],
+                        "port": "1735213033355~filter-port-1735213033355",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1735213033355~filter-defatult-port-1735213033355"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 5377.603329730398,
+                "y": 2119.89901967581
+            },
+            "inComePorts": [
+                "1735212920418~TOOL-port-1735212934715"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735213059281",
+            "promptName": "提示无权限",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735212290922~code-exe-defatult-port-1735212290923",
+                    "params": [
+                        {
+                            "paramId": "1735212290929",
+                            "paramName": "项目对象_合并",
+                            "paramAlias": "项目对象_合并",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735213033355~filter-port-1735213033355",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735213059281~code-exe-defatult-port-1735213059282",
+                    "params": [
+                        {
+                            "paramId": "1735213059317",
+                            "paramName": "提示_项目名称无权限",
+                            "paramAlias": "提示_项目名称无权限",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [
+                    {
+                        "variable": "arg1",
+                        "value_selector": {
+                            "paramId": "1735212290929",
+                            "paramName": "项目对象_合并",
+                            "paramAlias": "项目对象_合并",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    }
+                ],
+                "code_language": "javascript",
+                "code": "function main({arg1}) {\n  const prjNames = arg1.map((ele) => `\"${ele.prj_name}\"`).join(',')\n  const text = `抱歉，您没有权限访问项目${prjNames}。`\n  return {\n      \"提示_项目名称无权限\": text\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 5941.084692503862,
+                "y": 2170.278191729939
+            },
+            "inComePorts": [
+                "1735213033355~filter-port-1735213033355"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735213157788",
+            "promptName": "复制对象用于输出",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735212920418~TOOL-port-1735212934715",
+                    "params": [
+                        {
+                            "paramId": "1735212934714",
+                            "paramName": "项目对象_名称_有权限",
+                            "paramAlias": "项目对象_名称_有权限",
+                            "paramType": "列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735213033355~filter-defatult-port-1735213033355",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735213157788~code-exe-defatult-port-1735213157789",
+                    "params": [
+                        {
+                            "paramId": "1735213157827",
+                            "paramName": "项目对象_名称_输出",
+                            "paramAlias": "项目对象_名称_输出",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [
+                    {
+                        "variable": "arg1",
+                        "value_selector": {
+                            "paramId": "1735212934714",
+                            "paramName": "项目对象_名称_有权限",
+                            "paramAlias": "项目对象_名称_有权限",
+                            "paramType": "列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    }
+                ],
+                "code_language": "javascript",
+                "code": "function main({arg1}) {\n  return {\n      \"项目对象_名称_输出\": arg1\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 5934.706225140432,
+                "y": 2329.2780795552644
+            },
+            "inComePorts": [
+                "1735213033355~filter-defatult-port-1735213033355"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735214956935",
+            "promptName": "解析项目编码",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735206768393~TOOL-port-1735206786819",
+                    "params": [
+                        {
+                            "paramId": "1735206786818",
+                            "paramName": "项目对象_编码",
+                            "paramAlias": "项目对象_编码",
+                            "paramType": "对象列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735206856810~filter-defatult-port-1735206856810",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735214956935~code-exe-defatult-port-1735214956936",
+                    "params": [
+                        {
+                            "paramId": "1735214956977",
+                            "paramName": "项目编码_权限校验用",
+                            "paramAlias": "项目编码_权限校验用",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [
+                    {
+                        "variable": "arg1",
+                        "value_selector": {
+                            "paramId": "1735206786818",
+                            "paramName": "项目对象_编码",
+                            "paramAlias": "项目对象_编码",
+                            "paramType": "对象列表",
+                            "paramData": "$.data[:]",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    }
+                ],
+                "code_language": "javascript",
+                "code": "function main({arg1}) {\n  const prjKeys = arg1.map(ele => ele.prj_code)\n  return {\n      \"项目编码_权限校验用\": prjKeys\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 2085.2947799082885,
+                "y": 858.2938792154908
+            },
+            "inComePorts": [
+                "1735206856810~filter-defatult-port-1735206856810"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1735215236553",
+            "promptName": "解析项目编码用于权限校验",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1735212290922~code-exe-defatult-port-1735212290923",
+                    "params": [
+                        {
+                            "paramId": "1735212290929",
+                            "paramName": "项目对象_合并",
+                            "paramAlias": "项目对象_合并",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1735212384313~filter-defatult-port-1735212384313",
+                    "params": []
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1735215236553~code-exe-defatult-port-1735215236554",
+                    "params": [
+                        {
+                            "paramId": "1735215236598",
+                            "paramName": "项目编码_名称_权限校验用",
+                            "paramAlias": "项目编码_名称_权限校验用",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 1500,
+                "searchDocLimit": 20,
+                "minCorrelation": 0.4,
+                "resultType": "SEGMENT",
+                "rerankerModel": "",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": {
+                "variables": [
+                    {
+                        "variable": "arg1",
+                        "value_selector": {
+                            "paramId": "1735212290929",
+                            "paramName": "项目对象_合并",
+                            "paramAlias": "项目对象_合并",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    }
+                ],
+                "code_language": "javascript",
+                "code": "function main({arg1}) {\n  const prjKeys = arg1.map(ele => ele.prj_code)\n  return {\n      \"项目编码_名称_权限校验用\": prjKeys\n  }\n}",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 4347.608275730684,
+                "y": 2212.9013560844646
+            },
+            "inComePorts": [
+                "1735212384313~filter-defatult-port-1735212384313"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        }
+    ],
+    "inputParams": [
+        {
+            "port": "inputParams~port-default",
+            "params": [
+                {
+                    "paramId": "154921",
+                    "paramName": "用户输入",
+                    "paramAlias": "用户输入",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 0,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                },
+                {
+                    "paramId": "154930",
+                    "paramName": "权限控制",
+                    "paramAlias": "权限控制",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 0,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        }
+    ],
+    "outputParams": [
+        {
+            "port": "1735206887512~code-exe-defatult-port-1735206887513",
+            "params": [
+                {
+                    "paramId": "1735206887530",
+                    "paramName": "提示_编码不存在",
+                    "paramAlias": "提示_编码不存在",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1735211490532~code-exe-defatult-port-1735211490533",
+            "params": [
+                {
+                    "paramId": "1735211490545",
+                    "paramName": "提示_编码无权限",
+                    "paramAlias": "提示_编码无权限",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1735211562210~code-exe-defatult-port-1735211562211",
+            "params": [
+                {
+                    "paramId": "1735211562226",
+                    "paramName": "项目信息_编码_输出",
+                    "paramAlias": "项目信息_编码_输出",
+                    "paramType": "数组",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1735211771460~code-exe-defatult-port-1735211771461",
+            "params": [
+                {
+                    "paramId": "1735211771484",
+                    "paramName": "统计标志_1",
+                    "paramAlias": "统计标志_1",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1735212001723~code-exe-defatult-port-1735212001724",
+            "params": [
+                {
+                    "paramId": "1735212001757",
+                    "paramName": "统计标志_2",
+                    "paramAlias": "统计标志_2",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1735212711228~code-exe-defatult-port-1735212711228",
+            "params": [
+                {
+                    "paramId": "1735212711248",
+                    "paramName": "提示_项目名称不存在",
+                    "paramAlias": "提示_项目名称不存在",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1735212825724~code-exe-defatult-port-1735212825726",
+            "params": [
+                {
+                    "paramId": "1735212825749",
+                    "paramName": "统计标志_3",
+                    "paramAlias": "统计标志_3",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1735213059281~code-exe-defatult-port-1735213059282",
+            "params": [
+                {
+                    "paramId": "1735213059317",
+                    "paramName": "提示_项目名称无权限",
+                    "paramAlias": "提示_项目名称无权限",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1735213157788~code-exe-defatult-port-1735213157789",
+            "params": [
+                {
+                    "paramId": "1735213157827",
+                    "paramName": "项目对象_名称_输出",
+                    "paramAlias": "项目对象_名称_输出",
+                    "paramType": "数组",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        }
+    ],
+    "tenantId": "67775351-5245-4d15-a525-6cc798c92c6f",
+    "createUser": "product_demo",
+    "createTime": "2024-12-24 15:46:49",
+    "updateTime": "2025-08-29 16:50:23",
+    "chainType": "TOOL",
+    "publish": false,
+    "chainIconId": "",
+    "chainIconPath": "",
+    "presetQuestions": [],
+    "prologueTitle": "",
+    "prologue": "",
+    "globalParam": {
+        "globalVar": null,
+        "constVar": null
+    },
+    "top": 0,
+    "startPosition": {
+        "x": -236.23725368778076,
+        "y": 974.0266625692797
+    },
+    "endPosition": {
+        "x": 6321.927951513034,
+        "y": 1764.3875888302698
+    },
+    "createUserName": "",
+    "tagIds": [],
+    "isTool": true,
+    "appId": "f58a2987-11ab-4fa7-ae58-5988993c6302",
+    "multiChain": false,
+    "dialogAppConfig": "",
+    "isOwner": false,
+    "endInComePorts": [
+        "1735206887512~code-exe-defatult-port-1735206887513",
+        "1735211490532~code-exe-defatult-port-1735211490533",
+        "1735211562210~code-exe-defatult-port-1735211562211",
+        "1735211771460~code-exe-defatult-port-1735211771461",
+        "1735212001723~code-exe-defatult-port-1735212001724",
+        "1735212711228~code-exe-defatult-port-1735212711228",
+        "1735212825724~code-exe-defatult-port-1735212825726",
+        "1735213059281~code-exe-defatult-port-1735213059282",
+        "1735213157788~code-exe-defatult-port-1735213157789"
+    ],
+    "versionNumber": "",
+    "editable": false,
+    "showLog": true,
+    "isMcp": false,
+    "mcpInfo": {}
+}

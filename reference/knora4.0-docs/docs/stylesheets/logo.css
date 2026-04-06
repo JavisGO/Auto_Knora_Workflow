@@ -1,0 +1,11 @@
+.md-header .md-logo {
+  display: block;
+  width: 128px;
+  height: 34px;
+  padding: 0;
+}
+
+.md-header .md-logo img {
+  width: 128px !important;
+  height: 34px !important;
+}

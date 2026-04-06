@@ -1,0 +1,2380 @@
+{
+    "chainName": "智能客服问答_电单车",
+    "chainId": "d1fbacacf90c40c09aded3e385d372e1",
+    "chainDesc": "电单车智能客服问答",
+    "versionId": "1c3ae420d2b84f5cb4618df6286cc9de",
+    "registers": [],
+    "prompts": [
+        {
+            "promptId": "1738726156346",
+            "promptName": "提取车型车系信息",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738726156346~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738726156349",
+                            "paramName": "车型车系提取结果",
+                            "paramAlias": "车型车系提取结果",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": "你的任务：从用户输入中抽取用户提到的车型车系。\n注意以下3点:\n1.注意车型中文、字母和数字组成。\n2.车型可能包括后缀，例如“E200P“和”E200P  one“是两个不同的型号.\n3.直接输出识别到的车型，不需要描述内容。\n4.如果用户输入不涉及车型，则输出无。\n以下是2个车型抽取示例：\n示例一:\n用户输入:怎样解锁ECU?\n输出:无\n示例二:\n用户输入:电动E70C电池尺寸是多少？\n输出:电动E70C\n示例三：\n用户输入：E系列车架保修期是多少？\n输出：E系列\n用户输入:【#用户输入#】",
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "qwen-max",
+                "provider": "tongyi",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 1,
+                "dataRetryLimit": 1
+            },
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "LLM",
+            "position": {
+                "x": 393.68485250119284,
+                "y": 228.0680850264396
+            },
+            "inComePorts": [
+                "inputParams~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738726361111",
+            "promptName": "车型车系标准化匹配",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1738726156346~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738726156349",
+                            "paramName": "车型车系提取结果",
+                            "paramAlias": "车型车系提取结果",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738726361111~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738726379178",
+                            "paramName": "标准车型车系名称",
+                            "paramAlias": "标准车型车系名称",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [
+                    {
+                        "knowledgeId": "371f637b23694004a051204bdb5ca9c3",
+                        "knowledgeName": ""
+                    }
+                ],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 5000,
+                "searchDocLimit": 1,
+                "minCorrelation": 0.8,
+                "resultType": "FULL_TEXT",
+                "rerankerModel": "bce_reranker",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "STRUCT_DATASET",
+                "returnFields": [
+                    "ebike_车系名称",
+                    "ebike_车型名称",
+                    "ebike_类型"
+                ],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "KNOWLEDGE",
+            "position": {
+                "x": 1171.0095426211067,
+                "y": -102.07160157549345
+            },
+            "inComePorts": [
+                "1738726156346~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738726646170",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1738726361111~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738726379178",
+                            "paramName": "标准车型车系名称",
+                            "paramAlias": "标准车型车系名称",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1738726156346~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738726156349",
+                            "paramName": "车型车系提取结果",
+                            "paramAlias": "车型车系提取结果",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738726646170~code-exe-defatult-port-1738726646170",
+                    "params": [
+                        {
+                            "paramId": "1738726646186",
+                            "paramName": "车型",
+                            "paramAlias": "车型",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738726712465",
+                            "paramName": "车系",
+                            "paramAlias": "车系",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": {
+                "variables": [
+                    {
+                        "variable": "arg1",
+                        "value_selector": {
+                            "paramId": "1738726379178",
+                            "paramName": "标准车型车系名称",
+                            "paramAlias": "标准车型车系名称",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    },
+                    {
+                        "variable": "arg3",
+                        "value_selector": {
+                            "paramId": "1738726156349",
+                            "paramName": "车型车系提取结果",
+                            "paramAlias": "车型车系提取结果",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    }
+                ],
+                "code_language": "python3",
+                "code": "def main(arg1: list,arg3: str) -> dict:\n    if '无' in arg3:\n        return {\n            \"车型\": \"无\",\n            \"车系\": \"无\"\n        }\n    series_map = {\n      \"电自E系列\": \"E\",\n      \"电自F系列\": \"F\",\n      \"电自M系列\": \"M\",\n      \"电自N系列\": \"N\",\n      \"电自Nz系列\": \"Nz\",\n      \"电动E系列\": \"E\",\n      \"电动F系列\": \"F\",\n      \"电动M系列\": \"M\", \n      \"电动N系列\": \"N\",\n      \"电动Nz系列\": \"Nz\"\n    }\n    if arg1 and len(arg1)>0:\n        json_data = arg1[0]\n        vehicle_model = json_data.get('ebike_车型名称', '')\n        vehicle_series = json_data.get('ebike_车系名称', '')\n        type = json_data.get('ebike_类型', '')\n        if vehicle_model:\n            return {\n                  \"车型\": vehicle_model,\n                  \"车系\": series_map.get(vehicle_series, '无')\n                }\n    return {\n        \"车型\": \"无\",\n        \"车系\": \"无\"\n    }",
+                "dependencies": []
+            },
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "CODE",
+            "position": {
+                "x": 1914.0036507277534,
+                "y": 198.36272956724952
+            },
+            "inComePorts": [
+                "1738726361111~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738726771226",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1738726646170~code-exe-defatult-port-1738726646170",
+                    "params": [
+                        {
+                            "paramId": "1738726712465",
+                            "paramName": "车系",
+                            "paramAlias": "车系",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1738726712465",
+                                "operator": "=",
+                                "value": [
+                                    {
+                                        "paramId": "1738726794578",
+                                        "paramName": "过滤对比值.113977",
+                                        "paramAlias": "过滤对比值.113977",
+                                        "paramType": "文本",
+                                        "paramData": "无",
+                                        "sourceType": 2,
+                                        "required": false,
+                                        "paramDataFunc": "",
+                                        "outputOrder": 0,
+                                        "multiFile": false,
+                                        "fileType": [],
+                                        "refLabel": ""
+                                    }
+                                ]
+                            }
+                        ],
+                        "port": "1738726771226~filter-port-1738726771226",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1738726771226~filter-defatult-port-1738726771226"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 2704.413103767611,
+                "y": 763.5763632248304
+            },
+            "inComePorts": [
+                "1738726646170~code-exe-defatult-port-1738726646170"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738726807922",
+            "promptName": "通用知识库",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738726807922~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738726807948",
+                            "paramName": "引用内容.114034",
+                            "paramAlias": "引用内容.114034",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738726807950",
+                            "paramName": "引用文件.114036",
+                            "paramAlias": "引用文件.114036",
+                            "paramType": "引用文档",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [
+                    {
+                        "knowledgeId": "40b28da6806a4a208df7b12b08bcd3b7",
+                        "knowledgeName": ""
+                    }
+                ],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 5000,
+                "searchDocLimit": 1,
+                "minCorrelation": 0.4,
+                "resultType": "FULL_TEXT",
+                "rerankerModel": "bce_reranker",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "KNOWLEDGE",
+            "position": {
+                "x": 3428.4656123929585,
+                "y": 450.67565446004824
+            },
+            "inComePorts": [
+                "1738726771226~filter-port-1738726771226"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738726866746",
+            "promptName": "回答通用问题",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1738726807922~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738726807948",
+                            "paramName": "引用内容.114034",
+                            "paramAlias": "引用内容.114034",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738726807950",
+                            "paramName": "引用文件.114036",
+                            "paramAlias": "引用文件.114036",
+                            "paramType": "引用文档",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738726866746~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738726866777",
+                            "paramName": "通用问题答案",
+                            "paramAlias": "通用问题答案",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": "### 参考信息 ###\n【#引用内容.114034#】\n### 任务 ###\n1.根据参考信息回答问题。\n请回答问题：【#用户输入#】",
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "qwen-turbo",
+                "provider": "tongyi",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 1,
+                "dataRetryLimit": 1
+            },
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "LLM",
+            "position": {
+                "x": 5333.919687245534,
+                "y": 890.3607903089463
+            },
+            "inComePorts": [
+                "1738726807922~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738727019627",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738727019627~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738727019660",
+                            "paramName": "查询的属性",
+                            "paramAlias": "查询的属性",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": "已知车型实体包含以下属性：车型,认证型号,颜色,整车尺寸（L×W×H）,轮胎尺寸,电池尺寸,踏板尺寸（长×宽）,\"坐垫尺寸(长×宽×高)\n(高指海绵厚度)\",重量,标称载重,续航,轴距,离地间隙,车架材质,平叉材质,轮胎,轮胎胎压,减震方式,制动方式,最高速度,电机种类,电机额定转速,电控,电池种类,电池容量,电池材质,电池结构,电池制造商,电池寿命,标配充电器规格,充电时间,工作温度/散热,充电器电压,电机额定电压,控制器欠压保护值,控制器过流保护值,充电器输出电流,AC线长,DC线长,DC线接口,防水等级,前大灯,尾灯,电池额定能量,握把材质,适用年龄,百公里电耗,最大爬坡角度,电池安装位置,控制器安装位置,USB接口,P档,脚蹬宽度,前减震参数,后减震参数,BMS电池管理系统,智能龙头锁,RideyGo!,\"感应解锁\nNinebotAirLock\",驻车感应,乘坐感应,电动座桶锁,整车OTA,GPS+北斗+基站三重定位,AHRS姿态感应防盗,远程开关机+远程控车,黑匣子+事故主动求救,定速巡航,智能BMS5.0,整机额定功率,前后转向灯,轮毂材质,边撑材质,车把离地距离,坐垫离地距离。\n你的任务是：根据用户输入，输出用户需要查询的属性。\n注意以下几点：\n1.如果不需要查询属性，输出”无“。\n2. 如果只是提及属性，但不是对属性的具体查询，输出”无“\n3.不需要任何描述，直接输出需要查询的属性。\n4.不做意图推断。只从文字关键字识别。\n以下是3个属性抽取示例:\n示例1：\n用户输入:电动E70C车胎漏气怎么处理？\n输出: 无\n示例2：\n用户输入:E70C车架质保期是多久？\n输出: 无\n示例3:\n用户输入:E系列刹车异响怎么办？\n输出: 无\n用户输入:【#用户输入#】",
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "qwen-max",
+                "provider": "tongyi",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 1,
+                "dataRetryLimit": 1
+            },
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "LLM",
+            "position": {
+                "x": 3520.7263181088147,
+                "y": 2026.117785185579
+            },
+            "inComePorts": [
+                "1738726771226~filter-defatult-port-1738726771226"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738727136405",
+            "promptName": "判断查询知识库/图谱",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1738727019627~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738727019660",
+                            "paramName": "查询的属性",
+                            "paramAlias": "查询的属性",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1738727019660",
+                                "operator": "=",
+                                "value": [
+                                    {
+                                        "paramId": "1738727159795",
+                                        "paramName": "过滤对比值.114599",
+                                        "paramAlias": "过滤对比值.114599",
+                                        "paramType": "文本",
+                                        "paramData": "无",
+                                        "sourceType": 2,
+                                        "required": false,
+                                        "paramDataFunc": "",
+                                        "outputOrder": 0,
+                                        "multiFile": false,
+                                        "fileType": [],
+                                        "refLabel": ""
+                                    }
+                                ]
+                            }
+                        ],
+                        "port": "1738727136405~filter-port-1738727136405",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1738727136405~filter-defatult-port-1738727136405"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 4424.917457233938,
+                "y": 2379.7260171305384
+            },
+            "inComePorts": [
+                "1738727019627~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738736107020",
+            "promptName": "E系列知识库",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738736107020~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736107023",
+                            "paramName": "引用内容.141510",
+                            "paramAlias": "引用内容.141510",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738736107025",
+                            "paramName": "引用文件.141512",
+                            "paramAlias": "引用文件.141512",
+                            "paramType": "引用文档",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [
+                    {
+                        "knowledgeId": "bb396edbd90b4d47a4515da9400cff4e",
+                        "knowledgeName": ""
+                    }
+                ],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 5000,
+                "searchDocLimit": 1,
+                "minCorrelation": 0.4,
+                "resultType": "FULL_TEXT",
+                "rerankerModel": "bce_reranker",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "KNOWLEDGE",
+            "position": {
+                "x": 6195.558529011135,
+                "y": 1880.1057454468335
+            },
+            "inComePorts": [
+                "1738736147872~filter-port-1738736147872"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738736147872",
+            "promptName": "判断车系",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1738726646170~code-exe-defatult-port-1738726646170",
+                    "params": [
+                        {
+                            "paramId": "1738726712465",
+                            "paramName": "车系",
+                            "paramAlias": "车系",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738726712465",
+                            "paramName": "车系",
+                            "paramAlias": "车系",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738726712465",
+                            "paramName": "车系",
+                            "paramAlias": "车系",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738726712465",
+                            "paramName": "车系",
+                            "paramAlias": "车系",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": {
+                "conditions": [
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1738726712465",
+                                "operator": "=",
+                                "value": [
+                                    {
+                                        "paramId": "1738736205149",
+                                        "paramName": "过滤对比值.141655",
+                                        "paramAlias": "过滤对比值.141655",
+                                        "paramType": "文本",
+                                        "paramData": "E",
+                                        "sourceType": 2,
+                                        "required": false,
+                                        "paramDataFunc": "",
+                                        "outputOrder": 0,
+                                        "multiFile": false,
+                                        "fileType": [],
+                                        "refLabel": ""
+                                    }
+                                ]
+                            }
+                        ],
+                        "port": "1738736147872~filter-port-1738736147872",
+                        "logic": "AND"
+                    },
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1738726712465",
+                                "operator": "=",
+                                "value": [
+                                    {
+                                        "paramId": "1738736214148",
+                                        "paramName": "过滤对比值.141669",
+                                        "paramAlias": "过滤对比值.141669",
+                                        "paramType": "文本",
+                                        "paramData": "F",
+                                        "sourceType": 2,
+                                        "required": false,
+                                        "paramDataFunc": "",
+                                        "outputOrder": 0,
+                                        "multiFile": false,
+                                        "fileType": [],
+                                        "refLabel": ""
+                                    }
+                                ]
+                            }
+                        ],
+                        "port": "1738736147872~filter-port-1738736206421",
+                        "logic": "AND"
+                    },
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1738726712465",
+                                "operator": "=",
+                                "value": [
+                                    {
+                                        "paramId": "1738736224057",
+                                        "paramName": "过滤对比值.141724",
+                                        "paramAlias": "过滤对比值.141724",
+                                        "paramType": "文本",
+                                        "paramData": "M",
+                                        "sourceType": 2,
+                                        "required": false,
+                                        "paramDataFunc": "",
+                                        "outputOrder": 0,
+                                        "multiFile": false,
+                                        "fileType": [],
+                                        "refLabel": ""
+                                    }
+                                ]
+                            }
+                        ],
+                        "port": "1738736147872~filter-port-1738736215635",
+                        "logic": "AND"
+                    },
+                    {
+                        "expressions": [
+                            {
+                                "paramId": "1738726712465",
+                                "operator": "=",
+                                "value": [
+                                    {
+                                        "paramId": "1738736236178",
+                                        "paramName": "过滤对比值.141741",
+                                        "paramAlias": "过滤对比值.141741",
+                                        "paramType": "文本",
+                                        "paramData": "N",
+                                        "sourceType": 2,
+                                        "required": false,
+                                        "paramDataFunc": "",
+                                        "outputOrder": 0,
+                                        "multiFile": false,
+                                        "fileType": [],
+                                        "refLabel": ""
+                                    }
+                                ]
+                            }
+                        ],
+                        "port": "1738736147872~filter-port-1738736225577",
+                        "logic": "AND"
+                    }
+                ],
+                "default": "1738736147872~filter-defatult-port-1738736147872"
+            },
+            "writeKnowledgeConfig": null,
+            "promptType": "FILTER",
+            "position": {
+                "x": 5242.167383364758,
+                "y": 2102.534382528939
+            },
+            "inComePorts": [
+                "1738727136405~filter-port-1738727136405"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738736278595",
+            "promptName": "F系列知识库",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738736278595~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736278623",
+                            "paramName": "引用内容.141787",
+                            "paramAlias": "引用内容.141787",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738736278625",
+                            "paramName": "引用文件.141789",
+                            "paramAlias": "引用文件.141789",
+                            "paramType": "引用文档",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [
+                    {
+                        "knowledgeId": "dca3d651d475448ab7ff01e28048d8dc",
+                        "knowledgeName": ""
+                    }
+                ],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 5000,
+                "searchDocLimit": 1,
+                "minCorrelation": 0.4,
+                "resultType": "FULL_TEXT",
+                "rerankerModel": "bce_reranker",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "KNOWLEDGE",
+            "position": {
+                "x": 6202.602082080571,
+                "y": 2233.745770125917
+            },
+            "inComePorts": [
+                "1738736147872~filter-port-1738736206421"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738736315089",
+            "promptName": "M系列知识库",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738736315089~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736315122",
+                            "paramName": "引用内容.141869",
+                            "paramAlias": "引用内容.141869",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738736315124",
+                            "paramName": "引用文件.141871",
+                            "paramAlias": "引用文件.141871",
+                            "paramType": "引用文档",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [
+                    {
+                        "knowledgeId": "51ff83b10daf4f559753e908daa0b3b0",
+                        "knowledgeName": ""
+                    }
+                ],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 5000,
+                "searchDocLimit": 1,
+                "minCorrelation": 0.4,
+                "resultType": "FULL_TEXT",
+                "rerankerModel": "bce_reranker",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "KNOWLEDGE",
+            "position": {
+                "x": 6211.982105270944,
+                "y": 2621.324739193152
+            },
+            "inComePorts": [
+                "1738736147872~filter-port-1738736215635"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738736358040",
+            "promptName": "N系列知识库",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738736358040~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736358078",
+                            "paramName": "引用内容.141957",
+                            "paramAlias": "引用内容.141957",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738736358081",
+                            "paramName": "引用文件.141959",
+                            "paramAlias": "引用文件.141959",
+                            "paramType": "引用文档",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [
+                    {
+                        "knowledgeId": "8d155a3877774930921915832a91d624",
+                        "knowledgeName": ""
+                    }
+                ],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 5000,
+                "searchDocLimit": 1,
+                "minCorrelation": 0.4,
+                "resultType": "FULL_TEXT",
+                "rerankerModel": "bce_reranker",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "KNOWLEDGE",
+            "position": {
+                "x": 6216.476165066995,
+                "y": 2992.911066514406
+            },
+            "inComePorts": [
+                "1738736147872~filter-port-1738736225577"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738736383776",
+            "promptName": "Nz系列知识库",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738736383776~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736383819",
+                            "paramName": "引用内容.141987",
+                            "paramAlias": "引用内容.141987",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        },
+                        {
+                            "paramId": "1738736383821",
+                            "paramName": "引用文件.141989",
+                            "paramAlias": "引用文件.141989",
+                            "paramType": "引用文档",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": {
+                "knowledgeList": [
+                    {
+                        "knowledgeId": "d6ea28129887482dbdf91decb2b875b9",
+                        "knowledgeName": ""
+                    }
+                ],
+                "usedParams": [],
+                "searchType": "SEMANTIC",
+                "searchLimit": 5000,
+                "searchDocLimit": 1,
+                "minCorrelation": 0.4,
+                "resultType": "FULL_TEXT",
+                "rerankerModel": "bce_reranker",
+                "treeDataSetCallParam": {
+                    "use_default_params": true,
+                    "upward_aggregation_count_rate": 0.5,
+                    "upward_aggregation_min_degree_strategy": false,
+                    "upward_aggregation_min_degree_count": 2,
+                    "upward_aggregation_max_degree_strategy": false,
+                    "upward_aggregation_max_degree_count": 50,
+                    "upward_aggregation_entire_doc_strategy": false,
+                    "main_node_limit": 20,
+                    "context_extend_degree_limit": 2
+                },
+                "knowledgeType": "DATASET",
+                "returnFields": [],
+                "structFilter": null,
+                "structSearchType": "SEMANTIC",
+                "kbFilterDict": {}
+            },
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "KNOWLEDGE",
+            "position": {
+                "x": 6209.162402241872,
+                "y": 3307.3315091617565
+            },
+            "inComePorts": [
+                "1738736147872~filter-defatult-port-1738736147872"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738736417865",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1738736107020~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736107023",
+                            "paramName": "引用内容.141510",
+                            "paramAlias": "引用内容.141510",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1738736278595~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736278623",
+                            "paramName": "引用内容.141787",
+                            "paramAlias": "引用内容.141787",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1738736315089~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736315122",
+                            "paramName": "引用内容.141869",
+                            "paramAlias": "引用内容.141869",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1738736358040~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736358078",
+                            "paramName": "引用内容.141957",
+                            "paramAlias": "引用内容.141957",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "1738736383776~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736383819",
+                            "paramName": "引用内容.141987",
+                            "paramAlias": "引用内容.141987",
+                            "paramType": "数组",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738736417865~port-1738736417915",
+                    "params": [
+                        {
+                            "paramId": "1738736417913",
+                            "paramName": "知识库查询结果",
+                            "paramAlias": "知识库查询结果",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": null,
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "AGG",
+            "position": {
+                "x": 7755.010576835606,
+                "y": 2751.244404211843
+            },
+            "inComePorts": [
+                "1738736107020~port-default",
+                "1738736278595~port-default",
+                "1738736315089~port-default",
+                "1738736358040~port-default",
+                "1738736383776~port-default"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738736498719",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1738736417865~port-1738736417915",
+                    "params": [
+                        {
+                            "paramId": "1738736417913",
+                            "paramName": "知识库查询结果",
+                            "paramAlias": "知识库查询结果",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738736498719~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738736498769",
+                            "paramName": "车系知识库问题答案",
+                            "paramAlias": "车系知识库问题答案",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": "### 参考信息 ###\n【#知识库查询结果#】\n### 任务 ###\n1.根据参考信息回答问题。\n请回答问题：【#用户输入#】\n",
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "qwen-turbo",
+                "provider": "tongyi",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 1,
+                "dataRetryLimit": 1
+            },
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "LLM",
+            "position": {
+                "x": 8635.574419637609,
+                "y": 2946.0804806629108
+            },
+            "inComePorts": [
+                "1738736417865~port-1738736417915"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738736635817",
+            "promptName": "查询单车属性信息",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1738726646170~code-exe-defatult-port-1738726646170",
+                    "params": [
+                        {
+                            "paramId": "1738726646186",
+                            "paramName": "车型",
+                            "paramAlias": "车型",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738736635817~TOOL-port-1738737086582",
+                    "params": [
+                        {
+                            "paramId": "1738737086581",
+                            "paramName": "单车属性数据",
+                            "paramAlias": "单车属性数据",
+                            "paramType": "对象",
+                            "paramData": "$.data[:]{}",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": null,
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": null,
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "",
+                "provider": "",
+                "model_type": "",
+                "rounds": 0,
+                "errorRetryLimit": 2,
+                "dataRetryLimit": 2
+            },
+            "codeConfig": null,
+            "toolSelector": {
+                "useLLM": false,
+                "prompt": "",
+                "tools": [
+                    {
+                        "toolId": "a162626b896b4067abcee4860e8d34e5",
+                        "toolName": "按属性查找实体_电单车",
+                        "toolDesc": "输入属性名称、属性值、实体名称查找实体_用于企业经营管理图谱",
+                        "toolType": "http",
+                        "toolParams": [
+                            {
+                                "paramName": "propName",
+                                "paramAlias": "属性名称",
+                                "paramDesc": "属性名称",
+                                "required": true,
+                                "paramType": "字符串"
+                            },
+                            {
+                                "paramName": "entity_label",
+                                "paramAlias": "实体名称",
+                                "paramDesc": "实体名称",
+                                "required": true,
+                                "paramType": "字符串"
+                            },
+                            {
+                                "paramName": "propValue",
+                                "paramAlias": "属性值",
+                                "paramDesc": "属性值",
+                                "required": true,
+                                "paramType": "字符串"
+                            }
+                        ],
+                        "config": {
+                            "reqDefine": {
+                                "params": "{\"address\":\"10.172.5.69:8330\",\"projectName\":\"ninebot_demo\",\"graphName\":\"ninebot_product\"}",
+                                "body": "{\n  \"label\": \"{{entity_label}}\",\n  \"limit\": 1,\n  \"filters\": {\n    \"filters\": [\n      {\n        \"key\": \"{{propName}}\",\n        \"value\": \"{{propValue}}\",\n        \"operator\": \"EQ\"\n      }\n    ],\n    \"condition\": \"AND\"\n  }\n}",
+                                "headers": "{}",
+                                "url": "http://10.172.5.119:8323/api/nest/queryEntity",
+                                "method": "post"
+                            },
+                            "toolOutput": "$.data[:]{}"
+                        },
+                        "returnDataType": "对象",
+                        "createTime": "2025-02-05 14:29:16",
+                        "updateTime": "2025-02-05 14:29:16",
+                        "toolParamsValue": [
+                            {
+                                "paramName": "propName",
+                                "chainParam": {
+                                    "paramId": "1738737100462",
+                                    "paramName": "工具参数.143150",
+                                    "paramAlias": "工具参数.143150",
+                                    "paramType": "文本",
+                                    "paramData": "model_name",
+                                    "sourceType": 2,
+                                    "required": false,
+                                    "paramDataFunc": "",
+                                    "outputOrder": 0,
+                                    "multiFile": false,
+                                    "fileType": [],
+                                    "refLabel": ""
+                                }
+                            },
+                            {
+                                "paramName": "entity_label",
+                                "chainParam": {
+                                    "paramId": "1738737107828",
+                                    "paramName": "工具参数.143159",
+                                    "paramAlias": "工具参数.143159",
+                                    "paramType": "文本",
+                                    "paramData": "entity_model",
+                                    "sourceType": 2,
+                                    "required": false,
+                                    "paramDataFunc": "",
+                                    "outputOrder": 0,
+                                    "multiFile": false,
+                                    "fileType": [],
+                                    "refLabel": ""
+                                }
+                            },
+                            {
+                                "paramName": "propValue",
+                                "chainParam": {
+                                    "paramId": "1738726646186",
+                                    "paramName": "车型",
+                                    "paramAlias": "车型",
+                                    "paramType": "文本",
+                                    "paramData": null,
+                                    "sourceType": 1,
+                                    "required": false,
+                                    "paramDataFunc": "",
+                                    "outputOrder": 0,
+                                    "multiFile": false,
+                                    "fileType": [],
+                                    "refLabel": ""
+                                }
+                            }
+                        ],
+                        "port": "1738736635817~TOOL-port-1738737086582",
+                        "groupId": "78ea4d81eec64738b629be75d5d55c6e",
+                        "groupName": "智能客服工具集",
+                        "iconId": "",
+                        "assocCount": 0,
+                        "assocConnBots": [],
+                        "chainPermissions": []
+                    }
+                ]
+            },
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "TOOL",
+            "position": {
+                "x": 5165.7657174588685,
+                "y": 3077.8860122814303
+            },
+            "inComePorts": [
+                "1738727136405~filter-defatult-port-1738727136405"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        },
+        {
+            "promptId": "1738737135099",
+            "promptName": "",
+            "promptDesc": "",
+            "inputParams": [
+                {
+                    "port": "1738736635817~TOOL-port-1738737086582",
+                    "params": [
+                        {
+                            "paramId": "1738737086581",
+                            "paramName": "单车属性数据",
+                            "paramAlias": "单车属性数据",
+                            "paramType": "对象",
+                            "paramData": "$.data[:]{}",
+                            "sourceType": 1,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                },
+                {
+                    "port": "inputParams~port-default",
+                    "params": [
+                        {
+                            "paramId": "112837",
+                            "paramName": "用户输入",
+                            "paramAlias": "用户输入",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": true,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "outputParams": [
+                {
+                    "port": "1738737135099~port-default",
+                    "params": [
+                        {
+                            "paramId": "1738737135113",
+                            "paramName": "属性信息答案",
+                            "paramAlias": "属性信息答案",
+                            "paramType": "文本",
+                            "paramData": null,
+                            "sourceType": 0,
+                            "required": false,
+                            "paramDataFunc": "",
+                            "outputOrder": 0,
+                            "multiFile": false,
+                            "fileType": [],
+                            "refLabel": ""
+                        }
+                    ]
+                }
+            ],
+            "loopConfig": {
+                "enable": false,
+                "bindParams": []
+            },
+            "loopNodeConfig": null,
+            "batchNodeConfig": null,
+            "knowledgeConfig": null,
+            "datasetConfig": null,
+            "llmConfig": {
+                "system": "",
+                "promptTemplate": [],
+                "content": "已知电动车各属性数据json：【#单车属性数据#】\n你的任务：根据以上信息，回答用户提问。\n注意:直接输出结果，不要输出推理过程，但可以适当描述结果。\n用户提问：【#用户输入#】",
+                "temperature": "0.8",
+                "maxTokens": 1024,
+                "maxTime": 30.0,
+                "streamMode": false,
+                "tools": [],
+                "model": "qwen-turbo",
+                "provider": "tongyi",
+                "model_type": "llm",
+                "rounds": 0,
+                "errorRetryLimit": 1,
+                "dataRetryLimit": 1
+            },
+            "codeConfig": null,
+            "toolSelector": null,
+            "actionConfig": null,
+            "ontologyInferenceConfig": null,
+            "filterConfig": null,
+            "writeKnowledgeConfig": null,
+            "promptType": "LLM",
+            "position": {
+                "x": 6233.5530450412525,
+                "y": 3761.8848528835865
+            },
+            "inComePorts": [
+                "1738736635817~TOOL-port-1738737086582"
+            ],
+            "valueConfig": [],
+            "exceptionStrategyConfig": null
+        }
+    ],
+    "inputParams": [
+        {
+            "port": "inputParams~port-default",
+            "params": [
+                {
+                    "paramId": "112837",
+                    "paramName": "用户输入",
+                    "paramAlias": "用户输入",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 0,
+                    "required": true,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        }
+    ],
+    "outputParams": [
+        {
+            "port": "1738726866746~port-default",
+            "params": [
+                {
+                    "paramId": "1738726866777",
+                    "paramName": "通用问题答案",
+                    "paramAlias": "通用问题答案",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 0,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1738726807922~port-default",
+            "params": [
+                {
+                    "paramId": "1738726807950",
+                    "paramName": "引用文件.114036",
+                    "paramAlias": "引用文件.114036",
+                    "paramType": "引用文档",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 1,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1738736498719~port-default",
+            "params": [
+                {
+                    "paramId": "1738736498769",
+                    "paramName": "车系知识库问题答案",
+                    "paramAlias": "车系知识库问题答案",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 0,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 2,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1738736107020~port-default",
+            "params": [
+                {
+                    "paramId": "1738736107025",
+                    "paramName": "引用文件.141512",
+                    "paramAlias": "引用文件.141512",
+                    "paramType": "引用文档",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 3,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1738736278595~port-default",
+            "params": [
+                {
+                    "paramId": "1738736278625",
+                    "paramName": "引用文件.141789",
+                    "paramAlias": "引用文件.141789",
+                    "paramType": "引用文档",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 4,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1738736315089~port-default",
+            "params": [
+                {
+                    "paramId": "1738736315124",
+                    "paramName": "引用文件.141871",
+                    "paramAlias": "引用文件.141871",
+                    "paramType": "引用文档",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 5,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1738736358040~port-default",
+            "params": [
+                {
+                    "paramId": "1738736358081",
+                    "paramName": "引用文件.141959",
+                    "paramAlias": "引用文件.141959",
+                    "paramType": "引用文档",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 6,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1738736383776~port-default",
+            "params": [
+                {
+                    "paramId": "1738736383821",
+                    "paramName": "引用文件.141989",
+                    "paramAlias": "引用文件.141989",
+                    "paramType": "引用文档",
+                    "paramData": null,
+                    "sourceType": 1,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 7,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        },
+        {
+            "port": "1738737135099~port-default",
+            "params": [
+                {
+                    "paramId": "1738737135113",
+                    "paramName": "属性信息答案",
+                    "paramAlias": "属性信息答案",
+                    "paramType": "文本",
+                    "paramData": null,
+                    "sourceType": 0,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 8,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                }
+            ]
+        }
+    ],
+    "tenantId": "67775351-5245-4d15-a525-6cc798c92c6f",
+    "createUser": "product_demo",
+    "createTime": "2025-02-05 11:28:31",
+    "updateTime": "2025-10-20 11:58:39",
+    "chainType": "CHAT",
+    "publish": false,
+    "chainIconId": "89493d5df8b0c17e28afdeddb3a0c664",
+    "chainIconPath": "/spotlight/manager/v2/file/89493d5df8b0c17e28afdeddb3a0c664/preview",
+    "presetQuestions": [
+        "E70C车架质保期是多久",
+        "ECU怎样重启",
+        "E300P轮胎尺寸是多少",
+        "E300P的整机额定功率是多少",
+        "E300P的最高时速是多少",
+        "E300P的整车尺寸是多少",
+        "E300P的轴距是多少",
+        "E300P的坐垫尺寸是多少",
+        "E系列车架保修期是多久"
+    ],
+    "prologueTitle": "你好，\n我是 Knora AI 助手，\n很开心为你服务！",
+    "prologue": "我可以回答您有关“九号电动车使用、保修、参数等方面的问题”。您在提问时需要提供车辆型号，以确保回答结果符合您的期望。",
+    "globalParam": {
+        "globalVar": null,
+        "constVar": null
+    },
+    "top": 1,
+    "startPosition": {
+        "x": 0,
+        "y": 100
+    },
+    "endPosition": {
+        "x": 10262.904832765587,
+        "y": 2526.442784341827
+    },
+    "createUserName": "",
+    "tagIds": [],
+    "isTool": false,
+    "appId": "a3917817-d60e-492b-8417-cbcecf6d7f75",
+    "multiChain": false,
+    "dialogAppConfig": "",
+    "isOwner": false,
+    "endInComePorts": [
+        "1738726866746~port-default",
+        "1738736498719~port-default",
+        "1738737135099~port-default"
+    ],
+    "versionNumber": "",
+    "editable": false,
+    "showLog": true,
+    "isMcp": false,
+    "mcpInfo": {}
+}

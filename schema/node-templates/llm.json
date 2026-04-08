@@ -1,0 +1,45 @@
+{
+  "promptId": "{{node_id}}",
+  "promptName": "{{node_name}}",
+  "promptDesc": "",
+  "inputParams": [],
+  "outputParams": [],
+  "loopConfig": {
+    "enable": false,
+    "bindParams": []
+  },
+  "loopNodeConfig": null,
+  "batchNodeConfig": null,
+  "knowledgeConfig": null,
+  "datasetConfig": null,
+  "llmConfig": {
+    "system": "",
+    "promptTemplate": [],
+    "content": "{{prompt_content}}",
+    "temperature": "0.7",
+    "maxTokens": 2048,
+    "maxTime": 30.0,
+    "streamMode": false,
+    "tools": [],
+    "model": "qwen-plus",
+    "provider": "tongyi",
+    "model_type": "llm",
+    "rounds": 0,
+    "errorRetryLimit": 1,
+    "dataRetryLimit": 1
+  },
+  "codeConfig": null,
+  "toolSelector": null,
+  "actionConfig": null,
+  "ontologyInferenceConfig": null,
+  "filterConfig": null,
+  "writeKnowledgeConfig": null,
+  "promptType": "LLM",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "inComePorts": [],
+  "valueConfig": [],
+  "exceptionStrategyConfig": null
+}

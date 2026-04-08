@@ -1,0 +1,35 @@
+{
+  "promptId": "{{node_id}}",
+  "promptName": "",
+  "promptDesc": "",
+  "inputParams": [],
+  "outputParams": [],
+  "loopConfig": {
+    "enable": false,
+    "bindParams": []
+  },
+  "loopNodeConfig": null,
+  "batchNodeConfig": null,
+  "knowledgeConfig": null,
+  "datasetConfig": null,
+  "llmConfig": null,
+  "codeConfig": {
+    "variables": [],
+    "code_language": "python3",
+    "code": "def main({{input_vars}}) -> dict:\n    # 在此编写处理逻辑\n    return {\n        {{output_vars}}\n    }",
+    "dependencies": []
+  },
+  "toolSelector": null,
+  "actionConfig": null,
+  "ontologyInferenceConfig": null,
+  "filterConfig": null,
+  "writeKnowledgeConfig": null,
+  "promptType": "CODE",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "inComePorts": [],
+  "valueConfig": [],
+  "exceptionStrategyConfig": null
+}

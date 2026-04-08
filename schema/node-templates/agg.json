@@ -1,0 +1,30 @@
+{
+  "promptId": "{{node_id}}",
+  "promptName": "",
+  "promptDesc": "",
+  "inputParams": [],
+  "outputParams": [],
+  "loopConfig": {
+    "enable": false,
+    "bindParams": []
+  },
+  "loopNodeConfig": null,
+  "batchNodeConfig": null,
+  "knowledgeConfig": null,
+  "datasetConfig": null,
+  "llmConfig": null,
+  "codeConfig": null,
+  "toolSelector": null,
+  "actionConfig": null,
+  "ontologyInferenceConfig": null,
+  "filterConfig": null,
+  "writeKnowledgeConfig": null,
+  "promptType": "AGG",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "inComePorts": [],
+  "valueConfig": [],
+  "exceptionStrategyConfig": null
+}

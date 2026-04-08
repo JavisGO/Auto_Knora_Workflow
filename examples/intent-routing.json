@@ -1,0 +1,622 @@
+{
+  "chainName": "意图路由问答",
+  "chainId": "intent-routing-001",
+  "chainDesc": "意图路由流程：输入 → LLM意图识别 → FILTER分支 → [知识库/工具/代码] → AGG聚合 → LLM生成",
+  "versionId": "v1.0.0",
+  "registers": [],
+  "prompts": [
+    {
+      "promptId": "1744000000101",
+      "promptName": "意图识别",
+      "promptDesc": "",
+      "inputParams": [
+        {
+          "port": "inputParams~port-default",
+          "params": [
+            {
+              "paramId": "1744000000100",
+              "paramName": "用户输入",
+              "paramAlias": "用户输入",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 0,
+              "required": true,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "outputParams": [
+        {
+          "port": "1744000000101~port-default",
+          "params": [
+            {
+              "paramId": "1744000000110",
+              "paramName": "意图类型",
+              "paramAlias": "意图类型",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 0,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "loopConfig": { "enable": false, "bindParams": [] },
+      "loopNodeConfig": null,
+      "batchNodeConfig": null,
+      "knowledgeConfig": null,
+      "datasetConfig": null,
+      "llmConfig": {
+        "system": "",
+        "promptTemplate": [],
+        "content": "你是一个意图分类器。用户输入：\n【#用户输入#】\n\n请判断用户意图类型，只能输出以下之一：\n- knowledge：用户想查询知识库/文档\n- tool：用户想调用工具/接口\n- general：用户想进行一般性对话\n\n直接输出意图类型，不要有其他内容。",
+        "temperature": "0.1",
+        "maxTokens": 128,
+        "maxTime": 30.0,
+        "streamMode": false,
+        "tools": [],
+        "model": "qwen-plus",
+        "provider": "tongyi",
+        "model_type": "llm",
+        "rounds": 0,
+        "errorRetryLimit": 1,
+        "dataRetryLimit": 1
+      },
+      "codeConfig": null,
+      "toolSelector": null,
+      "actionConfig": null,
+      "ontologyInferenceConfig": null,
+      "filterConfig": null,
+      "writeKnowledgeConfig": null,
+      "promptType": "LLM",
+      "position": { "x": 300, "y": 200 },
+      "inComePorts": ["inputParams~port-default"],
+      "valueConfig": [],
+      "exceptionStrategyConfig": null
+    },
+    {
+      "promptId": "1744000000102",
+      "promptName": "",
+      "promptDesc": "",
+      "inputParams": [
+        {
+          "port": "1744000000101~port-default",
+          "params": [
+            {
+              "paramId": "1744000000110",
+              "paramName": "意图类型",
+              "paramAlias": "意图类型",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 1,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "outputParams": [],
+      "loopConfig": { "enable": false, "bindParams": [] },
+      "loopNodeConfig": null,
+      "batchNodeConfig": null,
+      "knowledgeConfig": null,
+      "datasetConfig": null,
+      "llmConfig": null,
+      "codeConfig": null,
+      "toolSelector": null,
+      "actionConfig": null,
+      "ontologyInferenceConfig": null,
+      "filterConfig": {
+        "conditions": [
+          {
+            "expressions": [
+              {
+                "paramId": "1744000000110",
+                "operator": "=",
+                "value": [
+                  {
+                    "paramId": "1744000000120",
+                    "paramName": "过滤对比值.intent",
+                    "paramAlias": "过滤对比值.intent",
+                    "paramType": "文本",
+                    "paramData": "knowledge",
+                    "sourceType": 2,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                  }
+                ]
+              }
+            ],
+            "port": "1744000000102~filter-port-1744000000102",
+            "logic": "AND"
+          },
+          {
+            "expressions": [
+              {
+                "paramId": "1744000000110",
+                "operator": "=",
+                "value": [
+                  {
+                    "paramId": "1744000000121",
+                    "paramName": "过滤对比值.intent2",
+                    "paramAlias": "过滤对比值.intent2",
+                    "paramType": "文本",
+                    "paramData": "tool",
+                    "sourceType": 2,
+                    "required": false,
+                    "paramDataFunc": "",
+                    "outputOrder": 0,
+                    "multiFile": false,
+                    "fileType": [],
+                    "refLabel": ""
+                  }
+                ]
+              }
+            ],
+            "port": "1744000000102~filter-port-tool",
+            "logic": "AND"
+          }
+        ],
+        "default": "1744000000102~filter-defatult-port-1744000000102"
+      },
+      "writeKnowledgeConfig": null,
+      "promptType": "FILTER",
+      "position": { "x": 600, "y": 200 },
+      "inComePorts": ["1744000000101~port-default"],
+      "valueConfig": [],
+      "exceptionStrategyConfig": null
+    },
+    {
+      "promptId": "1744000000103",
+      "promptName": "知识库查询",
+      "promptDesc": "",
+      "inputParams": [
+        {
+          "port": "inputParams~port-default",
+          "params": [
+            {
+              "paramId": "1744000000100",
+              "paramName": "用户输入",
+              "paramAlias": "用户输入",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 0,
+              "required": true,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "outputParams": [
+        {
+          "port": "1744000000103~port-default",
+          "params": [
+            {
+              "paramId": "1744000000130",
+              "paramName": "知识库结果",
+              "paramAlias": "知识库结果",
+              "paramType": "数组",
+              "paramData": null,
+              "sourceType": 0,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "loopConfig": { "enable": false, "bindParams": [] },
+      "loopNodeConfig": null,
+      "batchNodeConfig": null,
+      "knowledgeConfig": {
+        "knowledgeList": [
+          {
+            "knowledgeId": "{{knowledge_id_产品文档}}",
+            "knowledgeName": "{{knowledge_name_产品文档}}"
+          }
+        ],
+        "usedParams": [],
+        "searchType": "SEMANTIC",
+        "searchLimit": 10,
+        "searchDocLimit": 3,
+        "minCorrelation": 0.6,
+        "resultType": "FULL_TEXT",
+        "rerankerModel": "bce_reranker",
+        "treeDataSetCallParam": {
+          "use_default_params": true,
+          "upward_aggregation_count_rate": 0.5,
+          "upward_aggregation_min_degree_strategy": false,
+          "upward_aggregation_min_degree_count": 2,
+          "upward_aggregation_max_degree_strategy": false,
+          "upward_aggregation_max_degree_count": 50,
+          "upward_aggregation_entire_doc_strategy": false,
+          "main_node_limit": 20,
+          "context_extend_degree_limit": 2
+        },
+        "knowledgeType": "DOC_DATASET",
+        "returnFields": [],
+        "structFilter": null,
+        "structSearchType": "SEMANTIC",
+        "kbFilterDict": {}
+      },
+      "datasetConfig": null,
+      "llmConfig": null,
+      "codeConfig": null,
+      "toolSelector": null,
+      "actionConfig": null,
+      "ontologyInferenceConfig": null,
+      "filterConfig": null,
+      "writeKnowledgeConfig": null,
+      "promptType": "KNOWLEDGE",
+      "position": { "x": 900, "y": 100 },
+      "inComePorts": ["1744000000102~filter-port-1744000000102"],
+      "valueConfig": [],
+      "exceptionStrategyConfig": null
+    },
+    {
+      "promptId": "1744000000104",
+      "promptName": "工具调用",
+      "promptDesc": "",
+      "inputParams": [
+        {
+          "port": "inputParams~port-default",
+          "params": [
+            {
+              "paramId": "1744000000100",
+              "paramName": "用户输入",
+              "paramAlias": "用户输入",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 0,
+              "required": true,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "outputParams": [
+        {
+          "port": "1744000000104~TOOL-port-{{tool_port_id}}",
+          "params": [
+            {
+              "paramId": "1744000000140",
+              "paramName": "工具结果",
+              "paramAlias": "工具结果",
+              "paramType": "对象",
+              "paramData": "$.data{}",
+              "sourceType": 1,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "loopConfig": { "enable": false, "bindParams": [] },
+      "loopNodeConfig": null,
+      "batchNodeConfig": null,
+      "knowledgeConfig": null,
+      "datasetConfig": null,
+      "llmConfig": null,
+      "codeConfig": null,
+      "toolSelector": {
+        "useLLM": false,
+        "prompt": "",
+        "tools": [
+          {
+            "toolId": "{{tool_id_数据查询}}",
+            "toolName": "{{tool_name_数据查询API}}",
+            "toolDesc": "{{tool_desc_查询业务数据}}",
+            "toolType": "http",
+            "toolParams": [
+              {
+                "paramName": "query",
+                "paramAlias": "查询参数",
+                "paramDesc": "查询参数",
+                "required": true,
+                "paramType": "字符串"
+              }
+            ],
+            "config": {
+              "reqDefine": {
+                "params": "{{tool_params}}",
+                "body": "{\n  \"query\": \"{{query}}\"\n}",
+                "headers": "{}",
+                "url": "{{tool_url}}",
+                "method": "post"
+              },
+              "toolOutput": "$.data{}"
+            },
+            "returnDataType": "对象",
+            "createTime": "",
+            "updateTime": "",
+            "toolParamsValue": [
+              {
+                "paramName": "query",
+                "chainParam": {
+                  "paramId": "1744000000100",
+                  "paramName": "用户输入",
+                  "paramAlias": "用户输入",
+                  "paramType": "文本",
+                  "paramData": null,
+                  "sourceType": 0,
+                  "required": false,
+                  "paramDataFunc": "",
+                  "outputOrder": 0,
+                  "multiFile": false,
+                  "fileType": [],
+                  "refLabel": ""
+                }
+              }
+            ],
+            "port": "1744000000104~TOOL-port-{{tool_port_id}}",
+            "groupId": "",
+            "groupName": "",
+            "iconId": "",
+            "assocCount": 0,
+            "assocConnBots": [],
+            "chainPermissions": []
+          }
+        ]
+      },
+      "actionConfig": null,
+      "ontologyInferenceConfig": null,
+      "filterConfig": null,
+      "writeKnowledgeConfig": null,
+      "promptType": "TOOL",
+      "position": { "x": 900, "y": 350 },
+      "inComePorts": ["1744000000102~filter-port-tool"],
+      "valueConfig": [],
+      "exceptionStrategyConfig": null
+    },
+    {
+      "promptId": "1744000000105",
+      "promptName": "",
+      "promptDesc": "",
+      "inputParams": [
+        {
+          "port": "1744000000103~port-default",
+          "params": [
+            {
+              "paramId": "1744000000130",
+              "paramName": "知识库结果",
+              "paramAlias": "知识库结果",
+              "paramType": "数组",
+              "paramData": null,
+              "sourceType": 1,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        },
+        {
+          "port": "1744000000104~TOOL-port-{{tool_port_id}}",
+          "params": [
+            {
+              "paramId": "1744000000140",
+              "paramName": "工具结果",
+              "paramAlias": "工具结果",
+              "paramType": "对象",
+              "paramData": null,
+              "sourceType": 1,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 1,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "outputParams": [
+        {
+          "port": "1744000000105~port-1744000000150",
+          "params": [
+            {
+              "paramId": "1744000000150",
+              "paramName": "聚合结果",
+              "paramAlias": "聚合结果",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 1,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "loopConfig": { "enable": false, "bindParams": [] },
+      "loopNodeConfig": null,
+      "batchNodeConfig": null,
+      "knowledgeConfig": null,
+      "datasetConfig": null,
+      "llmConfig": null,
+      "codeConfig": null,
+      "toolSelector": null,
+      "actionConfig": null,
+      "ontologyInferenceConfig": null,
+      "filterConfig": null,
+      "writeKnowledgeConfig": null,
+      "promptType": "AGG",
+      "position": { "x": 1200, "y": 200 },
+      "inComePorts": [
+        "1744000000103~port-default",
+        "1744000000104~TOOL-port-{{tool_port_id}}"
+      ],
+      "valueConfig": [],
+      "exceptionStrategyConfig": null
+    },
+    {
+      "promptId": "1744000000106",
+      "promptName": "生成回答",
+      "promptDesc": "",
+      "inputParams": [
+        {
+          "port": "1744000000105~port-1744000000150",
+          "params": [
+            {
+              "paramId": "1744000000150",
+              "paramName": "聚合结果",
+              "paramAlias": "聚合结果",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 1,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "outputParams": [
+        {
+          "port": "1744000000106~port-default",
+          "params": [
+            {
+              "paramId": "1744000000160",
+              "paramName": "最终回答",
+              "paramAlias": "最终回答",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 0,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "loopConfig": { "enable": false, "bindParams": [] },
+      "loopNodeConfig": null,
+      "batchNodeConfig": null,
+      "knowledgeConfig": null,
+      "datasetConfig": null,
+      "llmConfig": {
+        "system": "你是一个智能问答助手。请综合检索到的信息回答用户问题。",
+        "promptTemplate": [],
+        "content": "检索到的信息：\n【#聚合结果#】\n\n用户问题：\n【#用户输入#】\n\n请根据以上信息生成回答。",
+        "temperature": "0.7",
+        "maxTokens": 2048,
+        "maxTime": 30.0,
+        "streamMode": false,
+        "tools": [],
+        "model": "qwen-plus",
+        "provider": "tongyi",
+        "model_type": "llm",
+        "rounds": 0,
+        "errorRetryLimit": 1,
+        "dataRetryLimit": 1
+      },
+      "codeConfig": null,
+      "toolSelector": null,
+      "actionConfig": null,
+      "ontologyInferenceConfig": null,
+      "filterConfig": null,
+      "writeKnowledgeConfig": null,
+      "promptType": "LLM",
+      "position": { "x": 1500, "y": 200 },
+      "inComePorts": ["1744000000105~port-1744000000150"],
+      "valueConfig": [],
+      "exceptionStrategyConfig": null
+    }
+  ],
+  "inputParams": [
+    {
+      "port": "inputParams~port-default",
+      "params": [
+        {
+          "paramId": "1744000000100",
+          "paramName": "用户输入",
+          "paramAlias": "用户输入",
+          "paramType": "文本",
+          "paramData": null,
+          "sourceType": 0,
+          "required": true,
+          "paramDataFunc": "",
+          "outputOrder": 0,
+          "multiFile": false,
+          "fileType": [],
+          "refLabel": ""
+        }
+      ]
+    }
+  ],
+  "outputParams": [
+    {
+      "port": "1744000000106~port-default",
+      "params": [
+        {
+          "paramId": "1744000000160",
+          "paramName": "最终回答",
+          "paramAlias": "最终回答",
+          "paramType": "文本",
+          "paramData": null,
+          "sourceType": 0,
+          "required": false,
+          "paramDataFunc": "",
+          "outputOrder": 0,
+          "multiFile": false,
+          "fileType": [],
+          "refLabel": ""
+        }
+      ]
+    }
+  ],
+  "endInComePorts": [
+    "1744000000106~port-default"
+  ],
+  "globalParam": {
+    "globalVar": null,
+    "constVar": null
+  },
+  "startPosition": { "x": 0, "y": 100 },
+  "endPosition": { "x": 1800, "y": 200 },
+  "presetQuestions": []
+}

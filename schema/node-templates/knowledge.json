@@ -1,0 +1,60 @@
+{
+  "promptId": "{{node_id}}",
+  "promptName": "{{node_name}}",
+  "promptDesc": "",
+  "inputParams": [],
+  "outputParams": [],
+  "loopConfig": {
+    "enable": false,
+    "bindParams": []
+  },
+  "loopNodeConfig": null,
+  "batchNodeConfig": null,
+  "knowledgeConfig": {
+    "knowledgeList": [
+      {
+        "knowledgeId": "{{knowledge_id}}",
+        "knowledgeName": "{{knowledge_name}}"
+      }
+    ],
+    "usedParams": [],
+    "searchType": "SEMANTIC",
+    "searchLimit": 10,
+    "searchDocLimit": 3,
+    "minCorrelation": 0.6,
+    "resultType": "FULL_TEXT",
+    "rerankerModel": "bce_reranker",
+    "treeDataSetCallParam": {
+      "use_default_params": true,
+      "upward_aggregation_count_rate": 0.5,
+      "upward_aggregation_min_degree_strategy": false,
+      "upward_aggregation_min_degree_count": 2,
+      "upward_aggregation_max_degree_strategy": false,
+      "upward_aggregation_max_degree_count": 50,
+      "upward_aggregation_entire_doc_strategy": false,
+      "main_node_limit": 20,
+      "context_extend_degree_limit": 2
+    },
+    "knowledgeType": "DOC_DATASET",
+    "returnFields": [],
+    "structFilter": null,
+    "structSearchType": "SEMANTIC",
+    "kbFilterDict": {}
+  },
+  "datasetConfig": null,
+  "llmConfig": null,
+  "codeConfig": null,
+  "toolSelector": null,
+  "actionConfig": null,
+  "ontologyInferenceConfig": null,
+  "filterConfig": null,
+  "writeKnowledgeConfig": null,
+  "promptType": "KNOWLEDGE",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "inComePorts": [],
+  "valueConfig": [],
+  "exceptionStrategyConfig": null
+}

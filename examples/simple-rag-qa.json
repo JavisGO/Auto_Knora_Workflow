@@ -1,0 +1,276 @@
+{
+  "chainName": "简单RAG问答",
+  "chainId": "simple-rag-qa-001",
+  "chainDesc": "基础 RAG 问答流程：输入 → 知识库检索 → LLM 生成回答",
+  "versionId": "v1.0.0",
+  "registers": [],
+  "prompts": [
+    {
+      "promptId": "1744000000001",
+      "promptName": "知识库检索",
+      "promptDesc": "",
+      "inputParams": [
+        {
+          "port": "inputParams~port-default",
+          "params": [
+            {
+              "paramId": "1744000000000",
+              "paramName": "用户问题",
+              "paramAlias": "用户问题",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 0,
+              "required": true,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "outputParams": [
+        {
+          "port": "1744000000001~port-default",
+          "params": [
+            {
+              "paramId": "1744000000010",
+              "paramName": "检索结果",
+              "paramAlias": "检索结果",
+              "paramType": "数组",
+              "paramData": null,
+              "sourceType": 0,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "loopConfig": {
+        "enable": false,
+        "bindParams": []
+      },
+      "loopNodeConfig": null,
+      "batchNodeConfig": null,
+      "knowledgeConfig": {
+        "knowledgeList": [
+          {
+            "knowledgeId": "{{knowledge_id_产品文档}}",
+            "knowledgeName": "{{knowledge_name_产品文档}}"
+          }
+        ],
+        "usedParams": [],
+        "searchType": "SEMANTIC",
+        "searchLimit": 10,
+        "searchDocLimit": 3,
+        "minCorrelation": 0.6,
+        "resultType": "FULL_TEXT",
+        "rerankerModel": "bce_reranker",
+        "treeDataSetCallParam": {
+          "use_default_params": true,
+          "upward_aggregation_count_rate": 0.5,
+          "upward_aggregation_min_degree_strategy": false,
+          "upward_aggregation_min_degree_count": 2,
+          "upward_aggregation_max_degree_strategy": false,
+          "upward_aggregation_max_degree_count": 50,
+          "upward_aggregation_entire_doc_strategy": false,
+          "main_node_limit": 20,
+          "context_extend_degree_limit": 2
+        },
+        "knowledgeType": "DOC_DATASET",
+        "returnFields": [],
+        "structFilter": null,
+        "structSearchType": "SEMANTIC",
+        "kbFilterDict": {}
+      },
+      "datasetConfig": null,
+      "llmConfig": null,
+      "codeConfig": null,
+      "toolSelector": null,
+      "actionConfig": null,
+      "ontologyInferenceConfig": null,
+      "filterConfig": null,
+      "writeKnowledgeConfig": null,
+      "promptType": "KNOWLEDGE",
+      "position": {
+        "x": 300,
+        "y": 200
+      },
+      "inComePorts": [
+        "inputParams~port-default"
+      ],
+      "valueConfig": [],
+      "exceptionStrategyConfig": null
+    },
+    {
+      "promptId": "1744000000002",
+      "promptName": "生成回答",
+      "promptDesc": "",
+      "inputParams": [
+        {
+          "port": "inputParams~port-default",
+          "params": [
+            {
+              "paramId": "1744000000000",
+              "paramName": "用户问题",
+              "paramAlias": "用户问题",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 0,
+              "required": true,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        },
+        {
+          "port": "1744000000001~port-default",
+          "params": [
+            {
+              "paramId": "1744000000010",
+              "paramName": "检索结果",
+              "paramAlias": "检索结果",
+              "paramType": "数组",
+              "paramData": null,
+              "sourceType": 1,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 1,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "outputParams": [
+        {
+          "port": "1744000000002~port-default",
+          "params": [
+            {
+              "paramId": "1744000000020",
+              "paramName": "AI回答",
+              "paramAlias": "AI回答",
+              "paramType": "文本",
+              "paramData": null,
+              "sourceType": 0,
+              "required": false,
+              "paramDataFunc": "",
+              "outputOrder": 0,
+              "multiFile": false,
+              "fileType": [],
+              "refLabel": ""
+            }
+          ]
+        }
+      ],
+      "loopConfig": {
+        "enable": false,
+        "bindParams": []
+      },
+      "loopNodeConfig": null,
+      "batchNodeConfig": null,
+      "knowledgeConfig": null,
+      "datasetConfig": null,
+      "llmConfig": {
+        "system": "你是一个智能问答助手。请根据提供的参考资料回答用户问题。",
+        "promptTemplate": [],
+        "content": "参考资料：\n【#检索结果#】\n\n用户问题：\n【#用户问题#】\n\n请根据参考资料回答用户问题。如果资料中没有相关信息，请如实说明。",
+        "temperature": "0.7",
+        "maxTokens": 2048,
+        "maxTime": 30.0,
+        "streamMode": false,
+        "tools": [],
+        "model": "qwen-plus",
+        "provider": "tongyi",
+        "model_type": "llm",
+        "rounds": 0,
+        "errorRetryLimit": 1,
+        "dataRetryLimit": 1
+      },
+      "codeConfig": null,
+      "toolSelector": null,
+      "actionConfig": null,
+      "ontologyInferenceConfig": null,
+      "filterConfig": null,
+      "writeKnowledgeConfig": null,
+      "promptType": "LLM",
+      "position": {
+        "x": 600,
+        "y": 200
+      },
+      "inComePorts": [
+        "1744000000001~port-default",
+        "inputParams~port-default"
+      ],
+      "valueConfig": [],
+      "exceptionStrategyConfig": null
+    }
+  ],
+  "inputParams": [
+    {
+      "port": "inputParams~port-default",
+      "params": [
+        {
+          "paramId": "1744000000000",
+          "paramName": "用户问题",
+          "paramAlias": "用户问题",
+          "paramType": "文本",
+          "paramData": null,
+          "sourceType": 0,
+          "required": true,
+          "paramDataFunc": "",
+          "outputOrder": 0,
+          "multiFile": false,
+          "fileType": [],
+          "refLabel": ""
+        }
+      ]
+    }
+  ],
+  "outputParams": [
+    {
+      "port": "1744000000002~port-default",
+      "params": [
+        {
+          "paramId": "1744000000020",
+          "paramName": "AI回答",
+          "paramAlias": "AI回答",
+          "paramType": "文本",
+          "paramData": null,
+          "sourceType": 0,
+          "required": false,
+          "paramDataFunc": "",
+          "outputOrder": 0,
+          "multiFile": false,
+          "fileType": [],
+          "refLabel": ""
+        }
+      ]
+    }
+  ],
+  "endInComePorts": [
+    "1744000000002~port-default"
+  ],
+  "globalParam": {
+    "globalVar": null,
+    "constVar": null
+  },
+  "startPosition": {
+    "x": 0,
+    "y": 100
+  },
+  "endPosition": {
+    "x": 900,
+    "y": 200
+  },
+  "presetQuestions": []
+}

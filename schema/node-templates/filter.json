@@ -1,0 +1,60 @@
+{
+  "promptId": "{{node_id}}",
+  "promptName": "",
+  "promptDesc": "",
+  "inputParams": [],
+  "outputParams": [],
+  "loopConfig": {
+    "enable": false,
+    "bindParams": []
+  },
+  "loopNodeConfig": null,
+  "batchNodeConfig": null,
+  "knowledgeConfig": null,
+  "datasetConfig": null,
+  "llmConfig": null,
+  "codeConfig": null,
+  "toolSelector": null,
+  "actionConfig": null,
+  "ontologyInferenceConfig": null,
+  "filterConfig": {
+    "conditions": [
+      {
+        "expressions": [
+          {
+            "paramId": "{{condition_param_id}}",
+            "operator": "{{operator}}",
+            "value": [
+              {
+                "paramId": "{{condition_value_id}}",
+                "paramName": "过滤对比值.{{rand}}",
+                "paramAlias": "过滤对比值.{{rand}}",
+                "paramType": "文本",
+                "paramData": "{{condition_value}}",
+                "sourceType": 2,
+                "required": false,
+                "paramDataFunc": "",
+                "outputOrder": 0,
+                "multiFile": false,
+                "fileType": [],
+                "refLabel": ""
+              }
+            ]
+          }
+        ],
+        "port": "{{node_id}}~filter-port-{{node_id}}",
+        "logic": "AND"
+      }
+    ],
+    "default": "{{node_id}}~filter-defatult-port-{{node_id}}"
+  },
+  "writeKnowledgeConfig": null,
+  "promptType": "FILTER",
+  "position": {
+    "x": 0,
+    "y": 0
+  },
+  "inComePorts": [],
+  "valueConfig": [],
+  "exceptionStrategyConfig": null
+}

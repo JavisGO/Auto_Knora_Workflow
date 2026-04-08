@@ -1,0 +1,44 @@
+{
+  "chainName": "{{workflow_name}}",
+  "chainId": "{{workflow_id}}",
+  "chainDesc": "{{workflow_description}}",
+  "versionId": "{{version_id}}",
+  "registers": [],
+  "prompts": [],
+  "inputParams": [
+    {
+      "port": "inputParams~port-default",
+      "params": [
+        {
+          "paramId": "{{input_param_id}}",
+          "paramName": "{{input_param_name}}",
+          "paramAlias": "{{input_param_alias}}",
+          "paramType": "文本",
+          "paramData": null,
+          "sourceType": 0,
+          "required": true,
+          "paramDataFunc": "",
+          "outputOrder": 0,
+          "multiFile": false,
+          "fileType": [],
+          "refLabel": ""
+        }
+      ]
+    }
+  ],
+  "outputParams": [],
+  "endInComePorts": [],
+  "globalParam": {
+    "globalVar": null,
+    "constVar": null
+  },
+  "startPosition": {
+    "x": 0,
+    "y": 100
+  },
+  "endPosition": {
+    "x": 1000,
+    "y": 500
+  },
+  "presetQuestions": []
+}

@@ -28,7 +28,7 @@
 Auto_Knora_Workflow/
 ├── .claude/
 │   └── skills/
-│       └── skill.md               # 核心 Skill（交互式问答 + 生成）
+│       └── SKILL.md              # 核心 Skill（交互式问答 + 生成）
 ├── schema/
 │   ├── workflow-template.json     # 工作流顶层模板
 │   └── node-templates/            # 6 种节点模板

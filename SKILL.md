@@ -1,3 +1,8 @@
+---
+name: knora-workflow
+description: 通过交互式问答生成 Knora 工作流 JSON 文件
+---
+
 # Knora Workflow Generator
 
 ## 角色

@@ -28,7 +28,7 @@
 Auto_Knora_Workflow/
 ├── .claude/
 │   └── skills/
-│       └── knora-workflow.md      # 核心 Skill（交互式问答 + 生成）
+│       └── skill.md               # 核心 Skill（交互式问答 + 生成）
 ├── schema/
 │   ├── workflow-template.json     # 工作流顶层模板
 │   └── node-templates/            # 6 种节点模板
@@ -43,7 +43,7 @@ Auto_Knora_Workflow/
 │   └── intent-routing.json        # 意图路由
 ├── output/                         # 生成输出目录
 ├── reference/                     # 参考资料（只读）
-│   ├── knora4.0-docs/
+│   ├── Logic.md
 │   └── workflow_output/
 ├── CLAUDE.md
 └── README.md
